@@ -1,0 +1,181 @@
+openapi: 3.1.0
+info:
+  title: User Authentication and Management API
+  summary: The REST service for managing user authentication, registration, and profile management.
+  version: 'v1.0'
+servers:
+  - url: http://localhost:3001
+paths:
+  /users/register:
+    post:
+      operationId: registerUser
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/UserRegistration'
+            examples:
+              userRegistrationExample:
+                value:
+                  email: jane.doe@example.com
+                  password: SecurePassword123
+                  name: Jane Doe
+      responses:
+        201:
+          description: User registered successfully
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: Bad request
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /users/login:
+    post:
+      operationId: loginUser
+      summary: Authenticate user and retrieve token
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+            examples:
+              userLoginExample:
+                value:
+                  email: jane.doe@example.com
+                  password: SecurePassword123
+      responses:
+        200:
+          description: Login successful
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/UserToken'
+        401:
+          description: Authentication failed
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /users/{userId}:
+    put:
+      operationId: updateUserProfile
+      summary: Update user profile details
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+          description: The user ID
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/UserProfileUpdate'
+            examples:
+              userProfileUpdateExample:
+                value:
+                  name: Jane Doe Updated
+                  bio: Updated bio here
+                  location: New Location
+      responses:
+        200:
+          description: Profile updated successfully
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        400:
+          description: Bad request
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    UserRegistration:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: user@example.com
+        password:
+          type: string
+          example: Password123
+        name:
+          type: string
+          example: John Doe
+    UserLogin:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: user@example.com
+        password:
+          type: string
+          example: Password123
+    UserProfileUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Jane Doe Updated
+        bio:
+          type: string
+          example: New bio...
+        location:
+          type: string
+          example: New City
+    UserToken:
+      type: object
+      properties:
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+    UserProfile:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Jane Doe Updated
+        bio:
+          type: string
+          example: New bio...
+        location:
+          type: string
+          example: New City
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 01ec13d5-bb13-4fd4-bf3b-85539f54b8b1
+        email:
+          type: string
+          format: email
+          example: jane.doe@example.com
+        name:
+          type: string
+          example: Jane Doe
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: BadRequest
+        message:
+          type: string
+          example: Details of the error here.
