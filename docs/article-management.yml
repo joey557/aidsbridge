@@ -1,0 +1,215 @@
+openapi: 3.1.0
+info:
+  title: Articles Management API
+  summary: The REST service for managing educational articles on HIV/AIDS awareness.
+  version: 'v1.0'
+servers:
+  - url: http://localhost:3001
+paths:
+  /articles:
+    get:
+      operationId: listArticles
+      summary: List all articles
+      responses:
+        200:
+          description: An array of articles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Article'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      operationId: createArticle
+      summary: Create a new article
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Article'
+            examples:
+              articleExample:
+                summary: Example of an article
+                value:
+                  title: "New Advances in HIV Treatment"
+                  content: "An in-depth look at the latest treatment protocols."
+                  author: "Dr. Jane Smith"
+      responses:
+        201:
+          description: Article created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+
+  /articles/{articleId}:
+    get:
+      operationId: getArticle
+      summary: Get an article by ID
+      parameters:
+        - name: articleId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the article
+      responses:
+        200:
+          description: Details of an article
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+        404:
+          description: Article not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+              examples:
+                notFoundExample:
+                  value:
+                    code: "404"
+                    message: "The requested article ID does not exist."
+
+    put:
+      operationId: updateArticle
+      summary: Update an article
+      parameters:
+        - name: articleId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the article
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Article'
+            examples:
+              articleUpdateExample:
+                summary: Example of an article update
+                value:
+                  title: "Updated Article Title"
+                  content: "Updated content here."
+                  author: "Dr. John Doe"
+      responses:
+        200:
+          description: Article updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+        400:
+          description: Bad Request - Invalid input provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        404:
+          description: Article not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+
+    delete:
+      operationId: deleteArticle
+      summary: Delete an article
+      parameters:
+        - name: articleId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the article to be deleted
+      responses:
+        200:
+          description: Article deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+        404:
+          description: Article not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Article:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the article
+          example: "123e4567-e89b-12d3-a456-426614174000"
+        title:
+          type: string
+          description: Title of the article
+          example: "Understanding HIV/AIDS"
+        content:
+          type: string
+          description: The content of the article
+          example: "Detailed content about HIV/AIDS here..."
+        author:
+          type: string
+          description: Author of the article
+          example: "Dr. Jane Smith"
+    BadRequest:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code indicating the request could not be processed due to client error.
+          example: "400"
+        message:
+          type: string
+          description: Detailed message explaining the bad request.
+          example: "Invalid input data provided."
+    NotFound:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code indicating the requested resource was not found.
+          example: "404"
+        message:
+          type: string
+          description: Detailed message explaining the resource could not be found.
+          example: "The requested article ID does not exist."
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: A general error code indicating the type of error.
+          example: "500"
+        message:
+          type: string
+          description: A general message describing what went wrong.
+          example: "Internal server error. Please try again later."
