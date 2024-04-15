@@ -11,7 +11,7 @@ const eventsSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  creater: {
+  creator: {
     type: String,
     required: true,
     trim: true

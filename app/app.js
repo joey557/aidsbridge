@@ -3,7 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 
 import initializeRouter from "./routes/index.js";
-import models from "./models/index.js";
+//import models from "./models/index.js";
 
 const initialize = (app) => {
   app.use(cors());
