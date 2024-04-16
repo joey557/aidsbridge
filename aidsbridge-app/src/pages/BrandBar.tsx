@@ -13,7 +13,7 @@ const BrandBar: React.FC = () => {
   };
 
   return (
-    <AppBar position="static" color="default" elevation={0} style={{ alignItems: 'center' }}>
+    <AppBar position="fixed" color="default" elevation={0} style={{ alignItems: 'center' }}>
       <Toolbar style={{ justifyContent: 'space-between', width: '80%', maxWidth: '1200px' }}>
         {/* Logo and brand name */}
         <Typography variant="h6" color="inherit" noWrap style={{ display: 'flex', alignItems: 'center' }}>

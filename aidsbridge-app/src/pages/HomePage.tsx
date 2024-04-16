@@ -1,5 +1,9 @@
 import React from 'react';
 import smileImage from  '../assets/smile-people.jpg';
+import HomePageArticle from '../components/homepage-article';
+
+
+
 
 const HomePage: React.FC = () => {
     const backgroundStyle = {
@@ -17,9 +21,12 @@ const HomePage: React.FC = () => {
 
     };
     return(
-        <div style={backgroundStyle}>
-            <h1>To protect everyone’s health, <br /> protect everyone’s rights </h1>
-        </div>
+        <>
+            <div style={backgroundStyle}>
+                <h1>To protect everyone’s health, <br /> protect everyone’s rights </h1>
+            </div>
+            <HomePageArticle />
+        </>
     );
 };
 export default HomePage;
