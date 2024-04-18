@@ -3,13 +3,23 @@ import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, Button, IconButton, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import logo from '../assets/web-logo.png';
+import { useNavigate } from 'react-router-dom';
+
+
+
+
 
 const BrandBar: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate(); 
 
   const handleSearch = () => {
     console.log('Performing search for:', searchTerm);
     // TODO: Add search logic here
+  };
+
+  const handleFindServices = () => {
+    navigate('/find-services'); 
   };
 
   return (
@@ -25,7 +35,9 @@ const BrandBar: React.FC = () => {
         
         <div style={{ display: 'flex', justifyContent: 'center', flexGrow: 1 }}>
           <Button color="inherit" style={{ margin: '0 20px' }}>ARTICLES</Button>
-          <Button color="inherit">EVENTS</Button>
+          <Button color="inherit" style={{ margin: '0 20px' }}>EVENTS</Button>
+          <Button color="inherit" onClick={handleFindServices}>FIND SERVICES</Button>
+          
         </div>
 
         {/* Search input and icon */}
