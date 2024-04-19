@@ -1,6 +1,6 @@
-import Users from './users';
-import Articles from './articles';
-import Events from './events';
+import Users from './users.js';
+import Articles from './articles.js';
+import Events from './events.js';
 
 export {
   Users,

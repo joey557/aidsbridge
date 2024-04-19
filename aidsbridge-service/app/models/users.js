@@ -18,6 +18,7 @@ const usersSchema = new mongoose.Schema({
   }
 });
 
-const Users = mongoose.model('Users', usersSchema);
+const DB = mongoose.connection.useDb("finaldb");
+const Users = DB.model('users', usersSchema);
 
 export default Users;

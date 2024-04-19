@@ -1,7 +1,7 @@
-import hivRouter from './hiv-route.js';
+import hivRouter from './aidsbridge-route.js';
 
 const initializeRoutes = (app) => {
-    app.use('/', hivRouter);
+    app.use('/aidsbridge', hivRouter);
 }
 
 export default initializeRoutes;
