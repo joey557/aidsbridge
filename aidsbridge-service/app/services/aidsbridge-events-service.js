@@ -9,12 +9,12 @@ export const saveEvents = async (event) => {
     return await newEvent.save();
 }
 
-export const removeEvents = async (title) => {
-    return await Events.deleteOne({ title: title }).exec();
+export const removeEvents = async (id) => {
+    return await Events.findByIdAndDelete(id).exec();
 }
 
-export const updateEvents = async (title, content) => {
-    return await Events.updateOne({ title: title }, content).exec();
+export const updateEvents = async (id, eventData) => {
+    return await Events.findByIdAndUpdate(id, eventData, {new: true}).exec();
 }
 
 export const filterEvents = async (filterOptions) => {
@@ -23,12 +23,12 @@ export const filterEvents = async (filterOptions) => {
 
     if (keyword) {
         query.$or = [
-            { title: { $regex: keyword, $options: 'i' } },  // 标题中搜索关键词
-            { content: { $regex: keyword, $options: 'i' } } // 内容中搜索关键词
+            { title: { $regex: keyword, $options: 'i' } },
+            { content: { $regex: keyword, $options: 'i' } }
         ];
     }
 
-    if (startDate || endDate) {
+    if (startDate || endEventDate) {
         query.eventsDate = {};
         if (startDate) {
             query.eventsDate.$gte = new Date(startDate);
@@ -38,5 +38,5 @@ export const filterEvents = async (filterOptions) => {
         }
     }
 
-    return await Articles.find(query).exec();
+    return await Events.find(query).exec();
 };

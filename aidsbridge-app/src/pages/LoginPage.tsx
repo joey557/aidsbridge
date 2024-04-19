@@ -22,28 +22,35 @@ const LoginPage: React.FC = () => {
 
   const navigate = useNavigate();
 
+  function generateShortID() {
+    const timestamp = Date.now().toString(36);
+    const random = Math.random().toString(36).substr(2, 5); 
+    return timestamp + random;
+  }
+
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
 
   const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate("/profile");
+    navigate("/profile"); // Navigate to profile page on successful login assumption
     userLogin(userName, password);
-    // Navigate to profile page on successful login assumption
   };
 
   const handleRegister = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     navigate("/profile"); // Assume registration is successful and navigate
+    const id = generateShortID();
+    userRegister(`user${id}`, userName, password);
   };
 
-  const userLogin = async (userName: string, password: string) => {
+  const userLogin = async (accountId: string, password: string) => {
     try {
       const response = await fetch("http://localhost:3000/aidsbridge/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userName, password }),
+        body: JSON.stringify({ accountId, password }),
       });
       if (response.ok) {
         const data = await response.json();
@@ -51,6 +58,28 @@ const LoginPage: React.FC = () => {
         console.log("Login successful");
       } else {
         console.log("Failed to login");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const userRegister = async (userName: string, accountId: string, password: string) => {
+    try {
+      const response = await fetch(
+        "http://localhost:3000/aidsbridge/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userName, accountId, password }),
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        console.log("Registration successful");
+      } else {
+        console.log("Failed to register");
       }
     } catch (error) {
       console.error(error);

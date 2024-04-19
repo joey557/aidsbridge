@@ -30,18 +30,18 @@ export const register = async (userData) => {
   }
 }
 
-export const login = async (userName, password) => {
+export const login = async (accountId, password) => {
   try {
     // Check if the account exists
-    const user = await Users.findOne({ userName });
+    const user = await Users.findOne({ accountId });
     if (!user) {
       throw new Error('Account does not exist');
     }
 
     // Validate the password
-    //const isMatch = await bcrypt.compare(password, user.password);
-
-    const isMatch = password === user.password;
+    const isMatch = await bcrypt.compare(password, user.password);
+    //const isMatch = password === user.password;
+    
     if (!isMatch) {
       throw new Error('Incorrect password');
     }

@@ -9,12 +9,12 @@ export const saveArticles = async (articles) => {
     return await newArticle.save();
 }
 
-export const removeArticles = async (title) => {
-    return await Articles.deleteOne({ title: title }).exec();
+export const removeArticles = async (id) => {
+    return await Articles.findByIdAndDelete(id).exec();
 }
 
-export const updateArticles = async (title, content) => {
-    return await Articles.updateOne({ title: title }, content).exec();
+export const updateArticles = async (id, articleData) => {
+    return await Articles.findByIdAndUpdate(id, articleData, {new: true}).exec();
 }
 
 export const filterArticles = async (filterOptions) => {

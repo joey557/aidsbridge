@@ -22,6 +22,10 @@ const articlesSchema = new mongoose.Schema({
   }
 });
 
-const Articles = mongoose.model('Articles', articlesSchema);
+
+//const Articles = mongoose.model('Articles', articlesSchema);
+
+const DB = mongoose.connection.useDb("finaldb");
+const Articles = DB.model('Articles', articlesSchema);
 
 export default Articles;

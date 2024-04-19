@@ -40,6 +40,9 @@ const eventsSchema = new mongoose.Schema({
   }
 });
 
-const Events = mongoose.model('Events', eventsSchema);
+//const Events = mongoose.model('Events', eventsSchema);
+
+const DB = mongoose.connection.useDb("finaldb");
+const Events = DB.model('Events', eventsSchema);
 
 export default Events;

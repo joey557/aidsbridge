@@ -1,33 +1,38 @@
-import express from 'express';
-import * as aidsbridgeController from '../controllers/aidsbridge-controller.js';
+import express from "express";
+import * as aidsbridgeController from "../controllers/aidsbridge-controller.js";
+
 const router = express.Router();
 
-router.route('/login')
-  .post(aidsbridgeController.userLogin);
+//login
+router.route("/login").post(aidsbridgeController.userLogin);
 
+//register
+router.route("/register").post(aidsbridgeController.userRegister);
 
 //articles
-router.route('/articles')
+router
+  .route("/articles")
   .get(aidsbridgeController.readArticles)
   .post(aidsbridgeController.postArticles);
 
-router.route('/articles/:title')
+router
+  .route("/articles/:id")
   .delete(aidsbridgeController.deleteArticle)
   .put(aidsbridgeController.updateArticle);
 
-router.route('/articles/filter')
-  .get(aidsbridgeController.filterArticles);
+router.route("/articles/filter").get(aidsbridgeController.filterArticles);
 
 //events
-router.route('/events')
+router
+  .route("/events")
   .get(aidsbridgeController.readEvents)
   .post(aidsbridgeController.postEvent);
 
-router.route('/events/:title')
+router
+  .route("/events/:id")
   .delete(aidsbridgeController.deleteEvent)
   .put(aidsbridgeController.updateEvent);
 
-router.route('/events/filter')
-  .get(aidsbridgeController.filterEvents);
+router.route("/events/filter").get(aidsbridgeController.filterEvents);
 
 export default router;
