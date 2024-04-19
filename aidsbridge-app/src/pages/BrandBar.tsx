@@ -2,9 +2,10 @@
 import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, Button, IconButton, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import logo from '../assets/web-logo.png';
 import { useNavigate } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 
 
 
@@ -12,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 const BrandBar: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate(); 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleSearch = () => {
     console.log('Performing search for:', searchTerm);
@@ -22,20 +24,30 @@ const BrandBar: React.FC = () => {
     navigate('/find-services'); 
   };
 
+  const handleAccountClick = () => {
+    if (isAuthenticated) {
+      navigate('/profile');  // Navigate to profile page if logged in
+    } else {
+      navigate('/login');    // Navigate to login page if not logged in
+    }
+  };
+
   return (
     <AppBar position="fixed" color="default" elevation={0} style={{ alignItems: 'center' }}>
-      <Toolbar style={{ justifyContent: 'space-between', width: '80%', maxWidth: '1200px' }}>
+      <Toolbar style={{ justifyContent: 'space-between', width: '90%', maxWidth: '1200px' }}>
         {/* Logo and brand name */}
-        <Typography variant="h6" color="inherit" noWrap style={{ display: 'flex', alignItems: 'center' }}>
-          <img src={logo} alt="Logo" style={{ maxHeight: '40px', marginRight: 8 }} />
-          AIDS<span style={{ color: '#E62117' }}>BRIDGE</span>
+        <Typography variant="h6" color="inherit" noWrap >
+          <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
+            <img src={logo} alt="Logo" style={{ maxHeight: '40px', marginRight: 8 }} />
+            AIDS<span style={{ color: '#E62117' }}>BRIDGE</span>
+          </Link>
         </Typography>
 
         {/* Navigation links */}
         
         <div style={{ display: 'flex', justifyContent: 'center', flexGrow: 1 }}>
           <Button color="inherit" style={{ margin: '0 20px' }}>ARTICLES</Button>
-          <Button color="inherit" style={{ margin: '0 20px' }}>EVENTS</Button>
+          <Button color="inherit" style={{ marginRight: '20px' }}>EVENTS</Button>
           <Button color="inherit" onClick={handleFindServices}>FIND SERVICES</Button>
           
         </div>
@@ -56,6 +68,12 @@ const BrandBar: React.FC = () => {
           />
           <IconButton color="inherit" onClick={handleSearch}>
             <SearchIcon />
+          </IconButton>
+        </div>
+        {/* Account icon */}
+        <div style={{ display: 'flex' , marginLeft:'40px'}}>
+          <IconButton color="inherit" onClick={handleAccountClick}>
+            <AccountCircleIcon />
           </IconButton>
         </div>
       </Toolbar>

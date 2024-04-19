@@ -3,15 +3,22 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BrandBar from './pages/BrandBar';
 import HomePage from './pages/HomePage';
 import LocatorPage from './pages/LocatorPage';  
+import LoginPage from './pages/LoginPage';
+
+import ProfilePage from './pages/ProfilePage';
+
+
 
 const AppRouter: React.FC = () => {
     return (
         <Router>
             <BrandBar />
             <Routes> 
-                <Route path="/" element={<HomePage />} />  // 使用 element 属性，并移除 exact
+                <Route path="/" element={<HomePage />} />  
                 <Route path="/find-services" element={<LocatorPage />} />
-                {/* 这里可以添加更多的路由 */}
+                <Route path="/login" element={<LoginPage />} />
+
+                <Route path="/login" element={<ProfilePage />} />
             </Routes>
         </Router>
     );
