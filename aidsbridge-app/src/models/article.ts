@@ -4,4 +4,5 @@ export interface Article {
     content: string;
     creater: string;
     createdDate: Date;
+    image: string;
   }

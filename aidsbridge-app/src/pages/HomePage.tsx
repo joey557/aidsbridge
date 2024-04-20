@@ -10,7 +10,7 @@ const HomePage: React.FC = () => {
     backgroundSize: "cover",
     backgroundPosition: "center 15%",
     backgroundRepeat: "no-repeat",
-    height: "70vh",
+    height: "100vh",
     width: "100vw",
     display: "flex",
     justifyContent: "center",

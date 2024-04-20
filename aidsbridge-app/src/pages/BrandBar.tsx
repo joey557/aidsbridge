@@ -24,6 +24,14 @@ const BrandBar: React.FC = () => {
     navigate('/find-services'); 
   };
 
+  const handleArticlesPage = () => {
+    navigate('/articles');
+  }
+
+  const handleEventsPage = () => {
+    navigate('/events');
+  }
+
   const handleAccountClick = () => {
     if (isAuthenticated) {
       navigate('/profile');  // Navigate to profile page if logged in
@@ -46,8 +54,8 @@ const BrandBar: React.FC = () => {
         {/* Navigation links */}
         
         <div style={{ display: 'flex', justifyContent: 'center', flexGrow: 1 }}>
-          <Button color="inherit" style={{ margin: '0 20px' }}>ARTICLES</Button>
-          <Button color="inherit" style={{ marginRight: '20px' }}>EVENTS</Button>
+          <Button color="inherit" style={{ margin: '0 20px' }} onClick={handleArticlesPage}>ARTICLES</Button>
+          <Button color="inherit" style={{ marginRight: '20px'}} onClick={handleEventsPage}>EVENTS</Button>
           <Button color="inherit" onClick={handleFindServices}>FIND SERVICES</Button>
           
         </div>
