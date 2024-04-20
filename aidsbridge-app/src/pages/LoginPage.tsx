@@ -3,17 +3,19 @@ import { useNavigate } from "react-router-dom";
 import {
   Button,
   TextField,
-  Typography,
   Container,
   Box,
-  Paper,
-  Link,
   Tabs,
   Tab,
 } from "@mui/material";
 import loginImage from "../assets/login.jpg";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
+import { useAuth } from "../context/AuthContext";
+
+
+
+
 
 const LoginPage: React.FC = () => {
   const [tabValue, setTabValue] = useState(0);
@@ -22,6 +24,7 @@ const LoginPage: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   //generate short id for user
   function generateShortID() {
@@ -33,11 +36,14 @@ const LoginPage: React.FC = () => {
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
+  
 
-  const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    userLogin(userName, password);
-  };
+  // const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   // If sucessful
+    
+  //   navigate('/profile');  
+  // };
 
   const handleRegister = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -49,14 +55,16 @@ const LoginPage: React.FC = () => {
     userRegister(`user${id}`, userName, password);
   };
 
-  const userLogin = async (accountId: string, password: string) => {
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     try {
       const response = await fetch("http://localhost:3000/aidsbridge/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ accountId, password }),
+        body: JSON.stringify({ accountId: userName, password }),
       });
       if (response.ok) {
+        login(); // update login state
         navigate("/profile"); // Navigate after successful login
         console.log("Login successful");
       } else {

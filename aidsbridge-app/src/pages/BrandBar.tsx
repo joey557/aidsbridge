@@ -6,14 +6,14 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import logo from '../assets/web-logo.png';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
+import { useAuth } from "../context/AuthContext";
 
 
 
 const BrandBar: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate(); 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isAuthenticated } = useAuth();
 
   const handleSearch = () => {
     console.log('Performing search for:', searchTerm);
