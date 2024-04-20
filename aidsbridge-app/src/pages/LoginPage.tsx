@@ -19,9 +19,11 @@ const LoginPage: React.FC = () => {
   const [tabValue, setTabValue] = useState(0);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const navigate = useNavigate();
 
+  //generate short id for user
   function generateShortID() {
     const timestamp = Date.now().toString(36);
     const random = Math.random().toString(36).substr(2, 5); 
@@ -34,13 +36,15 @@ const LoginPage: React.FC = () => {
 
   const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate("/profile"); // Navigate to profile page on successful login assumption
     userLogin(userName, password);
   };
 
   const handleRegister = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate("/profile"); // Assume registration is successful and navigate
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
     const id = generateShortID();
     userRegister(`user${id}`, userName, password);
   };
@@ -53,8 +57,7 @@ const LoginPage: React.FC = () => {
         body: JSON.stringify({ accountId, password }),
       });
       if (response.ok) {
-        const data = await response.json();
-        console.log(data);
+        navigate("/profile"); // Navigate after successful login
         console.log("Login successful");
       } else {
         console.log("Failed to login");
@@ -75,9 +78,8 @@ const LoginPage: React.FC = () => {
         }
       );
       if (response.ok) {
-        const data = await response.json();
-        console.log(data);
         console.log("Registration successful");
+        navigate("/"); // Navigate after successful registration
       } else {
         console.log("Failed to register");
       }
@@ -183,6 +185,19 @@ const LoginPage: React.FC = () => {
                 autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+              />
+              <TextField 
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="confirmPassword"
+                label="Confirm Password"
+                type="password"
+                id="confirmPassword"
+                autoComplete="current-password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
               <Button
                 type="submit"

@@ -18,7 +18,7 @@ const AppRouter: React.FC = () => {
                 <Route path="/find-services" element={<LocatorPage />} />
                 <Route path="/login" element={<LoginPage />} />
 
-                <Route path="/login" element={<ProfilePage />} />
+                <Route path="/profile" element={<ProfilePage />} />
             </Routes>
         </Router>
     );
