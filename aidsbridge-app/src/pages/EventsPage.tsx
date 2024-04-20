@@ -10,7 +10,7 @@ import { Events } from '../models/events';
 import { useEffect } from 'react';
 import { getBackgroundStyle } from '../components/BackgroundStyle';
 import image from "../assets/event.jpg";
-import EventPageArticle from '../components/homepage-article';
+import EventPageArticle from '../components/eventpage-article';
 // Sample data, you might typically fetch this from an API
 // const events = [
 //   {
