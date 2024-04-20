@@ -1,9 +1,11 @@
-import React from 'react';
+import React from "react";
 
 const ProfilePage: React.FC = () => {
-    return (
-        <p>Login</p>
-      );
+  return (
+    <div style={{ marginTop: '100px', textAlign: 'center'}}>
+      <h1>Login Successful</h1>
+    </div>
+  );
 };
 
 export default ProfilePage;
