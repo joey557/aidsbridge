@@ -3,24 +3,13 @@ import smileImage from "../assets/smile-people.jpg";
 import HomePageArticle from "../components/homepage-article";
 import Statistic from "../components/react-countup";
 import { Box } from "@mui/material";
-
+import { getBackgroundStyle } from "../components/BackgroundStyle";
 const HomePage: React.FC = () => {
-  const backgroundStyle = {
-    backgroundImage: `url(${smileImage})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center 15%",
-    backgroundRepeat: "no-repeat",
-    height: "100vh",
-    width: "100vw",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    color: "white",
-    fontSize: "2rem",
-    marginBottom: "100px",
-  };
+  
 
   const videoSrc = "https://youtube.com/embed/12vTnXekJu8";
+  // const backgroundImageUrl =smileImage;
+  const backgroundStyle = getBackgroundStyle(smileImage);
 
   return (
     <>
