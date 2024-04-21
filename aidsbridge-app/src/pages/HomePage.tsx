@@ -4,6 +4,9 @@ import HomePageArticle from "../components/homepage-article";
 import Statistic from "../components/react-countup";
 import { Box } from "@mui/material";
 import { getBackgroundStyle } from "../components/BackgroundStyle";
+
+
+
 const HomePage: React.FC = () => {
   
 
@@ -18,7 +21,7 @@ const HomePage: React.FC = () => {
           To protect everyone’s health, <br /> protect everyone’s rights{" "}
         </h1>
       </div>
-      <Box textAlign="center">
+      <Box textAlign="center" marginTop="80px">
         <h2>AIDS BY THE NUMBERS</h2>
         <p>See the latest data on HIV.</p>
       </Box>

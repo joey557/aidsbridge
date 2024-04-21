@@ -10,7 +10,7 @@ const getBackgroundStyle = (imageUrl: string) => ({
     alignItems: "center",
     color: "white",
     fontSize: "2rem",
-    marginBottom: "100px",
+    marginBottom: "50px",
   });
   
   export { getBackgroundStyle };
