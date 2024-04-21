@@ -2,6 +2,10 @@ import React from 'react';
 import { Card, CardContent, CardMedia, Typography, Container, Box, Toolbar, Grid } from '@mui/material';
 import { getBackgroundStyle } from '../components/BackgroundStyle';
 import doctor from '../assets/Doctor.jpg';
+import red from '../assets/red-aids.jpg';
+
+
+
 
 const LocatorPage: React.FC = () => {
   const backgroundStyle = getBackgroundStyle(doctor);
@@ -32,7 +36,7 @@ const LocatorPage: React.FC = () => {
                 <CardMedia
                   component="img"
                   height="140"
-                  image="/static/images/hiv-awareness.jpg"
+                  image={red}
                   alt="HIV Awareness"
                 />
                 <CardContent>
@@ -40,7 +44,7 @@ const LocatorPage: React.FC = () => {
                     Understanding HIV/AIDS
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    HIV (Human Immunodeficiency Virus) affects your immune system by destroying white blood cells that fight infection. Without treatment, HIV can lead to AIDS (acquired immunodeficiency syndrome).
+                    HIV  affects your immune system by destroying white blood cells that fight infection. Without treatment, HIV can lead to AIDS (acquired immunodeficiency syndrome).
                   </Typography>
                 </CardContent>
               </Card>
@@ -52,7 +56,7 @@ const LocatorPage: React.FC = () => {
                 <CardMedia
                   component="img"
                   height="140"
-                  image="/static/images/prevention-tips.jpg"
+                  image={red}
                   alt="Prevention Tips"
                 />
                 <CardContent>
@@ -72,7 +76,7 @@ const LocatorPage: React.FC = () => {
                 <CardMedia
                   component="img"
                   height="140"
-                  image="/static/images/support-groups.jpg"
+                  image={red}
                   alt="Support Groups"
                 />
                 <CardContent>
