@@ -9,6 +9,7 @@ import { Article } from '../models/article';
 
 export default function MediaCard() {
   const [articles, setArticles] = useState<Array<Article>>([]);
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     // Fetch articles from the backend server
@@ -18,13 +19,31 @@ export default function MediaCard() {
       .catch(error => console.error('Error fetching articles:', error));
   }, []);
 
+  useEffect(() => {
+    fetch("http://localhost:3000/aidsbridge/upload")
+      .then((response) => response.json())
+      .then((data) => {
+        const processedImages = data.map((img: { img: { data: { data: Iterable<number>; }; }; }) => {
+          const byteArray = new Uint8Array(img.img.data.data);
+          let binary = '';
+          for (let i = 0; i < byteArray.byteLength; i++) {
+            binary += String.fromCharCode(byteArray[i]);
+          }
+          return `data:image/jpeg;base64,${btoa(binary)}`;
+        });
+        setImages(processedImages);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  
+
   return (
-    <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+    <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', marginTop: '100px'}}>
       {articles.map((article, index) => (
         <Card key={index} sx={{ maxWidth: 345 }}>
           <CardMedia
             sx={{ height: 140 }}
-            image={article.image || "/static/images/default.jpg"}
+            image={images[index] || "/static/images/default.jpg"}
             title="Article Image"
           />
           <CardContent>

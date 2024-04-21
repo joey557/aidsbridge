@@ -3,6 +3,7 @@ import * as articleService from "../services/aidsbridge-articles-service.js";
 import * as eventService from "../services/aidsbridge-events-service.js";
 import * as userService from "../services/aidsbridge-user-service.js";
 import fs from "fs";
+import imageModel from "../models/images.js";
 
 export const readArticles = async (req, res) => {
     try {
@@ -128,14 +129,26 @@ export const userRegister = async (req, res) => {
 }
 
 export const uploadImage = async (req, res) => {
-    const saveImage = new imageModel({
-        name: req.body.name,
-        img: {
-            data: fs.readFileSync('./uploads/' + req.file.filename),
-            contentType: 'image/png'
-        }
-    });
-    saveImage.save()
-        .then((res) => { console.log('image saved') })
-        .catch((err) => { console.log(err, 'error while saving image') });
+    try {
+        const saveImage = new imageModel({
+            name: req.body.name,
+            img: {
+                data: fs.readFileSync('./uploads/' + req.file.filename),
+                contentType: 'image/png'
+            }
+        });
+        await saveImage.save();
+        setResponse({ message: 'Image saved' }, res);
+    } catch (err) {
+        setError(err, res);
+    }
+};
+
+export const getImages = async (req, res) => {
+    try {
+        const images = await imageModel.find({});
+        setResponse(images, res);
+    } catch (err) {
+        setError(err, res);
+    }
 }

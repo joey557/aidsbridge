@@ -6,44 +6,20 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import AccordionActions from '@mui/material/AccordionActions';
-import { Events } from '../models/events';
+import { Event } from '../models/event';
 import { useEffect } from 'react';
 import { getBackgroundStyle } from '../components/BackgroundStyle';
 import image from "../assets/event.jpg";
 import EventPageArticle from '../components/eventpage-article';
-// Sample data, you might typically fetch this from an API
-// const events = [
-//   {
-//     id: 1,
-//     title: "World AIDS Day Conference 2024",
-//     content: "Join us for a comprehensive conference on the latest advancements in HIV research, treatment, and management. This event brings together healthcare professionals, researchers, and community advocates to share knowledge and strategies for combating HIV/AIDS globally.",
-//     people: [
-//       { peopleName: "Dr. Jane Smith", accountId: "prof123" },
-//       { peopleName: "Dr. Robert Lee", accountId: "prof456" },
-//     ],
-//     createdDate: "2024-04-01T00:00:00Z",
-//     eventsDate: "2024-12-01T09:00:00Z"
-//   },
-//   {
-//     id: 2,
-//     title: "Local Community HIV Testing Drive",
-//     content: "We are hosting a free HIV testing drive for the local community to promote early detection and awareness. The event will include educational sessions on prevention and treatment options, and will provide support resources for those affected.",
-//     people: [
-//       { peopleName: "Nurse Emily Doe", accountId: "nurse789" },
-//       { peopleName: "Counselor John Roe", accountId: "couns101" },
-//     ],
-//     createdDate: "2024-04-15T00:00:00Z",
-//     eventsDate: "2024-05-20T10:00:00Z"
-//   }
-// ];
+
 
 export default function EventsAccordion() {
-    const [events, setEvents] = React.useState<Array<Events>>([]);
+    const [events, setEvents] = React.useState<Array<Event>>([]);
     const backgroundStyle = getBackgroundStyle(image);
 
 
     useEffect(() => {
-        // Fetch articles from the backend server
+        // Fetch events from the backend server
         fetch('http://localhost:3000/aidsbridge/events')
           .then(response => response.json())
           .then(data => setEvents(data))

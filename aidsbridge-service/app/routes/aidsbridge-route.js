@@ -37,20 +37,10 @@ router
 
 router.route("/events/filter").get(aidsbridgeController.filterEvents);
 
-// router
-//   .post('/upload', upload.single('eventsImage'), (req, res) => {
-//     const saveImage = new imageModel({
-//       name: req.body.name,
-//       img: {
-//         data: fs.readFileSync('./uploads/' + req.file.filename),
-//         contentType: 'image/png'
-//       }
-//     });
-//     saveImage.save()
-//       .then((res) => { console.log('image saved') })
-//       .catch((err) => { console.log(err, 'error while saving image') });
-//   })
 
-router.post("/upload", upload.single("eventsImage"), aidsbridgeController.uploadImage);
+router
+  .route("/upload")
+  .post(upload.single("eventsImage"), aidsbridgeController.uploadImage)
+  .get(aidsbridgeController.getImages);
 
 export default router;
