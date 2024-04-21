@@ -12,6 +12,8 @@ import { getBackgroundStyle } from '../components/BackgroundStyle';
 import image from "../assets/event.jpg";
 import EventPageArticle from '../components/eventpage-article';
 import CreateEventForm from '../components/CreateEventform'; 
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "../theme";
 
 export default function EventsAccordion() {
     const [events, setEvents] = React.useState<Array<Event>>([]);
@@ -25,6 +27,7 @@ export default function EventsAccordion() {
       }, []);
 
     return (
+      <ThemeProvider theme={theme}>
       <>
         <div style={getBackgroundStyle(image)}>
           <h1 style={{textAlign: 'center'}}>
@@ -67,5 +70,6 @@ export default function EventsAccordion() {
           ))}
         </div>
       </>
+      </ThemeProvider> 
     );
 }
