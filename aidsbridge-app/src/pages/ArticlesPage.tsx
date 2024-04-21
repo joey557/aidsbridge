@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -9,41 +9,40 @@ import { Article } from '../models/article';
 
 export default function MediaCard() {
   const [articles, setArticles] = useState<Array<Article>>([]);
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<{[key: string]: string}>({});
 
   useEffect(() => {
-    // Fetch articles from the backend server
+    // Fetch articles
     fetch('http://localhost:3000/aidsbridge/articles')
       .then(response => response.json())
       .then(data => setArticles(data))
       .catch(error => console.error('Error fetching articles:', error));
-  }, []);
 
-  useEffect(() => {
+    // Fetch images and map them by imageId
     fetch("http://localhost:3000/aidsbridge/upload")
       .then((response) => response.json())
       .then((data) => {
-        const processedImages = data.map((img: { img: { data: { data: Iterable<number>; }; }; }) => {
+        const imageMap = data.reduce((acc: {[key: string]: string}, img: {_id: string, img: {data: {data: Iterable<number>}}} ) => {
           const byteArray = new Uint8Array(img.img.data.data);
           let binary = '';
           for (let i = 0; i < byteArray.byteLength; i++) {
             binary += String.fromCharCode(byteArray[i]);
           }
-          return `data:image/jpeg;base64,${btoa(binary)}`;
-        });
-        setImages(processedImages);
+          acc[img._id] = `data:image/jpeg;base64,${btoa(binary)}`;
+          return acc;
+        }, {});
+        setImages(imageMap);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error('Error fetching images:', err));
   }, []);
-  
 
   return (
     <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', marginTop: '100px'}}>
-      {articles.map((article, index) => (
-        <Card key={index} sx={{ maxWidth: 345 }}>
+      {articles.map((article) => (
+        <Card key={article._id} sx={{ maxWidth: 345 }}>
           <CardMedia
             sx={{ height: 140 }}
-            image={images[index] || "/static/images/default.jpg"}
+            image={images[article.imageId] || "/static/images/default.jpg"}
             title="Article Image"
           />
           <CardContent>

@@ -19,6 +19,11 @@ const articlesSchema = new mongoose.Schema({
   createdDate: {
     type: Date,
     default: Date.now
+  },
+  imageId: {
+    type: String,
+    //required: true,
+    trim: true
   }
 });
 
