@@ -1,0 +1,13 @@
+{
+    "appbar.title.label": "Course Registration",
+    "appbar.login.label": "Login",
+    "course.table.link.button.label": "Link",
+    "courses.table.view.button.label": "View",
+    "course.table.register.button.label": "Register",
+    "courses.table.column.id": "Id",
+    "courses.table.column.name": "Course Name",
+    "courses.table.column.credits": "Credits",
+    "courses.table.column.link": "Link",
+    "courses.table.column.view": "View",
+    "button.back": "Back"
+}

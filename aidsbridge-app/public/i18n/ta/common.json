@@ -1,0 +1,14 @@
+{
+    "appbar.title.label": "课程注册",
+    "appbar.login.label": "登陆",
+    "course.table.link.button.label": "链接",
+    "courses.table.view.button.label": "查看",
+    "course.table.register.button.label": "注册",
+    "courses.table.column.id": "Id",
+    "courses.table.column.name": "课程名称",
+    "courses.table.column.credits": "学分",
+    "courses.table.column.link": "链接",
+    "courses.table.column.view": "查看",
+    "courses.table.column.Register": "注册",
+    "button.back": "返回"
+}
