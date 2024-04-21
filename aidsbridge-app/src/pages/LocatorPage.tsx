@@ -13,9 +13,9 @@ const LocatorPage: React.FC = () => {
   return (
     <>
       <div style={backgroundStyle}>
-        <h2>
-          You're not alone in this journey <br /> — find local support and services close to you.
-        </h2>
+        <h1>
+          You're not alone in this journey 
+        </h1>
       </div>
       <Container maxWidth="md" sx={{ mt: 4 }}>
         <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ mt: 4 }}>
@@ -32,7 +32,7 @@ const LocatorPage: React.FC = () => {
           <Grid container spacing={2} justifyContent="center" marginTop="50px">
             {/* Understanding HIV/AIDS */}
             <Grid item xs={12} sm={6} md={4}>
-              <Card sx={{ width: 250, height: 350, mb: 2 }}>
+              <Card sx={{ width: 250, height: 380, mb: 2 }}>
                 <CardMedia
                   component="img"
                   height="140"
@@ -40,9 +40,10 @@ const LocatorPage: React.FC = () => {
                   alt="HIV Awareness"
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                  {/* <Typography gutterBottom variant="h5" component="div">
                     Understanding HIV/AIDS
-                  </Typography>
+                  </Typography> */}
+                  <h3>Understanding HIV/AIDS</h3>
                   <Typography variant="body2" color="text.secondary">
                     HIV  affects your immune system by destroying white blood cells that fight infection. Without treatment, HIV can lead to AIDS (acquired immunodeficiency syndrome).
                   </Typography>
@@ -52,7 +53,7 @@ const LocatorPage: React.FC = () => {
 
             {/* Prevention Tips */}
             <Grid item xs={12} sm={6} md={4}>
-              <Card sx={{ width: 250, height: 350, mb: 2 }}>
+              <Card sx={{ width: 250, height: 380, mb: 2 }}>
                 <CardMedia
                   component="img"
                   height="140"
@@ -60,9 +61,8 @@ const LocatorPage: React.FC = () => {
                   alt="Prevention Tips"
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Prevention Tips
-                  </Typography>
+                  
+                  <h3>Prevention Tips</h3>
                   <Typography variant="body2" color="text.secondary">
                     Always use a new, clean needle if you inject drugs, practice safe sex using condoms, and consider PrEP medications if you're at high risk of HIV.
                   </Typography>
@@ -72,7 +72,7 @@ const LocatorPage: React.FC = () => {
 
             {/* Finding Support */}
             <Grid item xs={12} sm={6} md={4}>
-              <Card sx={{ width: 250, height: 350, mb: 2 }}>
+              <Card sx={{ width: 250, height: 380, mb: 2 }}>
                 <CardMedia
                   component="img"
                   height="140"
@@ -80,9 +80,9 @@ const LocatorPage: React.FC = () => {
                   alt="Support Groups"
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Finding Support
-                  </Typography>
+                  <h3>Finding Support</h3>
+                    
+                  
                   <Typography variant="body2" color="text.secondary">
                     Many communities offer support groups and counselors specifically trained to help with the psychological and emotional aspects of living with HIV/AIDS.
                   </Typography>

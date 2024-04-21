@@ -6,10 +6,15 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Article } from '../models/article';
+import { getBackgroundStyle } from '../components/BackgroundStyle';
+import readingImage from '../assets/reading.jpg';
+
+
 
 export default function MediaCard() {
   const [articles, setArticles] = useState<Array<Article>>([]);
   const [images, setImages] = useState<{[key: string]: string}>({});
+  const backgroundStyle = getBackgroundStyle(readingImage);
 
   useEffect(() => {
     // Fetch articles
@@ -37,28 +42,35 @@ export default function MediaCard() {
   }, []);
 
   return (
-    <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', marginTop: '100px'}}>
-      {articles.map((article) => (
-        <Card key={article._id} sx={{ maxWidth: 345 }}>
-          <CardMedia
-            sx={{ height: 140 }}
-            image={images[article.imageId] || "/static/images/default.jpg"}
-            title="Article Image"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {article.title}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {article.content.substring(0, 150) + '...'}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small">Share</Button>
-            <Button size="small">Learn More</Button>
-          </CardActions>
-        </Card>
-      ))}
-    </div>
+    <>
+      <div style={backgroundStyle}>
+          <h2>
+          Explore, Learn, Advocate: <br /> Uniting Voices Against HIV/AIDS
+          </h2>
+        </div>
+      <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', marginTop: '100px'}}>
+        {articles.map((article) => (
+          <Card key={article._id} sx={{ maxWidth: 345 }}>
+            <CardMedia
+              sx={{ height: 140 }}
+              image={images[article.imageId] || "/static/images/default.jpg"}
+              title="Article Image"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {article.title}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {article.content.substring(0, 150) + '...'}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small">Share</Button>
+              <Button size="small">Learn More</Button>
+            </CardActions>
+          </Card>
+        ))}
+      </div>
+    </>
   );
 }
