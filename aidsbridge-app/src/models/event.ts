@@ -11,4 +11,5 @@ export interface EventPerson {
     people: EventPerson[];
     createdDate: Date;
     eventsDate: Date;
+    image: string | null;
   }
