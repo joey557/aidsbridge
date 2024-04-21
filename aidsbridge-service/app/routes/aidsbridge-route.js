@@ -1,5 +1,7 @@
 import express from "express";
 import * as aidsbridgeController from "../controllers/aidsbridge-controller.js";
+import fs from "fs";
+import upload from "../middleware/multerConfig.js";
 
 const router = express.Router();
 
@@ -34,5 +36,21 @@ router
   .put(aidsbridgeController.updateEvent);
 
 router.route("/events/filter").get(aidsbridgeController.filterEvents);
+
+// router
+//   .post('/upload', upload.single('eventsImage'), (req, res) => {
+//     const saveImage = new imageModel({
+//       name: req.body.name,
+//       img: {
+//         data: fs.readFileSync('./uploads/' + req.file.filename),
+//         contentType: 'image/png'
+//       }
+//     });
+//     saveImage.save()
+//       .then((res) => { console.log('image saved') })
+//       .catch((err) => { console.log(err, 'error while saving image') });
+//   })
+
+router.post("/upload", upload.single("eventsImage"), aidsbridgeController.uploadImage);
 
 export default router;
