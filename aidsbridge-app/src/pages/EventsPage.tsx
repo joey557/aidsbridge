@@ -87,9 +87,7 @@ export default function EventsAccordion() {
                   {t('event.card.attendees')}
                 </Typography>
                 <ul>
-                  {event.people.map(person => (
-                    <li key={person.accountId}>{person.peopleName}</li>
-                  ))}
+                  {event.creator}
                 </ul>
               </AccordionDetails>
               <AccordionActions style={{ position: 'absolute', bottom: '10px', right: '10px' }}>
