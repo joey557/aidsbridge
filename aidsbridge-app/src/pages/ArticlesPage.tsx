@@ -92,37 +92,72 @@ export default function MediaCard() {
       .catch((err) => console.error("Error fetching images:", err));
   }, []);
 
-   return (
+  return (
     <>
       <div style={backgroundStyle}>
         <h2>
           {t("article.header.line")} <br /> {t("article.header.line2")}
         </h2>
       </div>
-      <div style={{ display: "flex", justifyContent: 'center', alignItems: 'flex-start', gap: "20px", flexWrap: "wrap", marginTop: "50px", padding: "20px" }}>
-        {aidsArticles.map(article => (
-          <Card key={article._id} sx={{ width: 345, margin: 'auto', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', transition: '0.3s' }}>
-            <CardMedia
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: 'center', 
+          alignItems:'flex-start',
+          gap: "20px",
+          flexWrap: "wrap",
+          marginTop: "100px",
+          maxWidth: "80%", //
+          marginLeft: "auto",
+          marginRight: "auto",
+          
+        }}
+      >
+        <div>
+          <div style={{ marginBottom: "100px" }}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleOpenForm}
+            >
+              Create Article
+            </Button>
+          </div>
+          <div style={{ display: "flex", justifyContent: 'center', alignItems: 'flex-start', gap: "20px", flexWrap: "wrap", marginTop: "50px", padding: "20px" }}>
+          {aidsArticles.map((article) => (
+            <Card key={article._id} sx={{ width: 345, height: 450, margin: 'auto', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', transition: '0.3s' }}>
+              <CardMedia
               component="img"
               height="194"
               image={images[article.imageId] || "/static/images/default.jpg"}
               alt="Article Image"
             />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {article.title}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {article.content.substring(0, 150) + "..."}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small" onClick={() => handleArticleClick(article._id || "")}>Learn More</Button>
-            </CardActions>
-          </Card>
-        ))}
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {article.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {article.content.substring(0, 150) + "..."}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                {/* <Button size="small">Share</Button> */}
+                <Button
+                  size="small"
+                  onClick={() => handleArticleClick(article._id || "")}
+                >
+                  Learn More
+                </Button>
+              </CardActions>
+
+              <CreateArticleForm open={isFormOpen} onClose={handleCloseForm} />
+            </Card>
+          ))}
+          </div>
+        </div>
       </div>
-      <CreateArticleForm open={isFormOpen} onClose={handleCloseForm} />
+      {/* <ArticleDialog article={selectedArticle} open={open} onClose={handleClose} /> */}
     </>
   );
 }
