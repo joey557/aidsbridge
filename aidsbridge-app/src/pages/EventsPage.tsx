@@ -48,22 +48,24 @@ export default function EventsAccordion() {
     }, [dispatch]);
 
     return (
-      <ThemeProvider theme={theme}>
-        <div style={getBackgroundStyle(image)}>
-          <h1 style={{ textAlign: 'center' }}>
-            {t('event.header.line')}
-            <br />{t('event.header.line2')}
-          </h1>
-        </div>
-        <EventPageArticle />
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '20px', marginTop: '20px' }}>
+    <ThemeProvider theme={theme}>
+      <div style={getBackgroundStyle(image)}>
+        <h1 style={{ textAlign: 'center' }}>
+          {t('event.header.line')}
+          <br />{t('event.header.line2')}
+        </h1>
+      </div>
+      <EventPageArticle/>
+      <div style={{ marginLeft: '100px' }}>
+        <div>
           <CreateEventForm />
         </div>
+
         <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gridGap: '20px',
-            padding: '20px'
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gridGap: '20px',
+          padding: '20px'
         }}>
           {aidsEvents.map(event => (
             <CustomAccordion key={event._id}>
@@ -72,7 +74,9 @@ export default function EventsAccordion() {
                 aria-controls={`panel${event._id}-content`}
                 id={`panel${event._id}-header`}
               >
-                {event.title}
+                <Typography variant="subtitle1" component="h2">
+                  {event.title}
+                </Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <Typography variant="subtitle1" component="h2">
@@ -83,17 +87,16 @@ export default function EventsAccordion() {
                   {t('event.card.attendees')}
                 </Typography>
                 <ul>
-                  {event.people.map(person => (
-                    <li key={person.accountId}>{person.peopleName}</li>
-                  ))}
+                  {event.creator}
                 </ul>
               </AccordionDetails>
-              <AccordionActions>
+              <AccordionActions style={{ position: 'absolute', bottom: '10px', right: '10px' }}>
                 <Button color="primary" variant="contained">Join</Button>
               </AccordionActions>
             </CustomAccordion>
           ))}
         </div>
-      </ThemeProvider> 
-    );
+      </div>
+    </ThemeProvider>
+  );
 }
