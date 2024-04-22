@@ -1,51 +1,56 @@
 import * as React from 'react';
-import Accordion from '@mui/material/Accordion';
+import { useDispatch, useSelector } from 'react-redux';
+import { ThemeProvider, styled } from "@mui/material/styles";
+import MuiAccordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import AccordionActions from '@mui/material/AccordionActions';
-//import { Event } from '../models/event';
-import { useEffect } from 'react';
-import { getBackgroundStyle } from '../components/BackgroundStyle';
-import image from "../assets/event.jpg";
-import EventPageArticle from '../components/eventpage-article';
-import CreateEventForm from '../components/CreateEventform'; 
-import { ThemeProvider } from "@mui/material/styles";
-import theme from "../theme";
 import { useTranslation } from 'react-i18next';
 
-import { AppDispatch } from '../store';
-import { useDispatch, useSelector } from 'react-redux';
 import { loadEvents, getAllEvents } from '../store/events-slice';
 import { getEvents } from '../services/events-service';
+import { selectCurrentUser } from '../store/account-slice';
+import EventPageArticle from '../components/eventpage-article';
+import CreateEventForm from '../components/CreateEventform';
+import { getBackgroundStyle } from '../components/BackgroundStyle';
+import image from "../assets/event.jpg";
+import theme from "../theme";
+
+const CustomAccordion = styled(MuiAccordion)(({ theme }) => ({
+  backgroundColor: theme.palette.grey[200],  
+  margin: '10px',
+  boxShadow: theme.shadows[2],
+  '&:before': {  
+    display: 'none',
+  },
+  '&.Mui-expanded': {
+    margin: '10px 10px',
+  },
+  minHeight: 48,
+  '&:not(.Mui-expanded)': {
+    minHeight: 48,
+  },
+}));
 
 export default function EventsAccordion() {
-    //const [events, setEvents] = React.useState<Array<Event>>([]);
-
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useDispatch();
     const aidsEvents = useSelector(getAllEvents());
     const { t } = useTranslation('common');
-    useEffect(() => {
-      getEvents().then((events) => {
-        dispatch(loadEvents(events))
-      })
-    })
+    const user = useSelector(selectCurrentUser);
 
-    // useEffect(() => {
-    //     // Fetch events from the backend server
-    //     fetch('http://localhost:3000/aidsbridge/events')
-    //       .then(response => response.json())
-    //       .then(data => setEvents(data))
-    //       .catch(error => console.error('Error fetching events:', error));
-    //   }, []);
+    React.useEffect(() => {
+      getEvents().then(events => {
+        dispatch(loadEvents(events));
+      });
+    }, [dispatch]);
 
     return (
       <ThemeProvider theme={theme}>
-      <>
         <div style={getBackgroundStyle(image)}>
-          <h1 style={{textAlign: 'center'}}>
+          <h1 style={{ textAlign: 'center' }}>
             {t('event.header.line')}
             <br />{t('event.header.line2')}
           </h1>
@@ -54,9 +59,14 @@ export default function EventsAccordion() {
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '20px', marginTop: '20px' }}>
           <CreateEventForm />
         </div>
-        <div style={{ marginTop: '100px', textAlign: 'center' }}>
+        <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gridGap: '20px',
+            padding: '20px'
+        }}>
           {aidsEvents.map(event => (
-            <Accordion key={event._id}>
+            <CustomAccordion key={event._id}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls={`panel${event._id}-content`}
@@ -81,10 +91,9 @@ export default function EventsAccordion() {
               <AccordionActions>
                 <Button color="primary" variant="contained">Join</Button>
               </AccordionActions>
-            </Accordion>
+            </CustomAccordion>
           ))}
         </div>
-      </>
       </ThemeProvider> 
     );
 }
