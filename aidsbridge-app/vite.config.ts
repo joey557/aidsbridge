@@ -12,12 +12,12 @@ export default defineConfig({
           enabled: true
         },
         manifest: {
-          "name": "CourseRegistration",
-          "short_name": "CourseRegist",
+          "name": "AidsBridge",
+          "short_name": "AidsBg",
           "start_url": "./",
           "display": "standalone",
           "background_color": "#fff",
-          "description": "Course Registration App.",
+          "description": "AidsBridge App.",
           "theme_color": "#ffffff",
           "icons": [
             {
