@@ -103,13 +103,15 @@ export default function MediaCard() {
       <div
         style={{
           display: "flex",
-          // justifyContent: 'center', //
+          justifyContent: 'center', 
+          alignItems:'flex-start',
           gap: "20px",
           flexWrap: "wrap",
           marginTop: "100px",
           maxWidth: "80%", //
           marginLeft: "auto",
           marginRight: "auto",
+          
         }}
       >
         <div>
@@ -122,7 +124,7 @@ export default function MediaCard() {
               Create Article
             </Button>
           </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
           {aidsArticles.map((article) => (
             <Card key={article._id} sx={{ maxWidth: 300, flex: '0 0 345px' }}>
               <CardMedia
