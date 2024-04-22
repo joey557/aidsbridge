@@ -17,7 +17,7 @@ import { useTranslation } from 'react-i18next';
 import { Article } from "../models/article";
 import { AppDispatch } from '../store';
 import ArticleDialog from '../components/ArticleDialog';
-
+import { useNavigate } from 'react-router-dom';
 export default function MediaCard() {
   //const [articles, setArticles] = useState<Array<Article>>([]);
   const [images, setImages] = useState<{ [key: string]: string }>({});
@@ -30,6 +30,8 @@ export default function MediaCard() {
 
   const [open, setOpen] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+  const navigate = useNavigate();
+
 
 
   const handleClickOpen = (article: React.SetStateAction<Article | null>) => {
@@ -40,6 +42,10 @@ export default function MediaCard() {
   const handleClose = () => {
     setOpen(false);
     setSelectedArticle(null);
+  };
+
+  const handleArticleClick = (articleId: string) => {
+    navigate(`/articles/${articleId}`);
   };
 
   useEffect(() => {
@@ -99,7 +105,7 @@ export default function MediaCard() {
             </CardContent>
             <CardActions>
               {/* <Button size="small">Share</Button> */}
-              <Button size="small" onClick={() => handleClickOpen(article)}>Learn More</Button>
+              <Button size="small" onClick={() => handleArticleClick(article._id)}>Learn More</Button>
             </CardActions>
           </Card>
         ))}

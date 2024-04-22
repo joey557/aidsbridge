@@ -1,0 +1,32 @@
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { AppState } from '../store';
+
+const ArticleDetailPage: React.FC = () => {
+  const { articleId } = useParams<{ articleId: string }>();
+  // 使用 useSelector 获取文章数据
+  const article = useSelector((state: AppState) => state.articles.find(a => a._id === articleId));
+
+  if (!article) {
+    return <div>Article not found</div>;
+  }
+
+  return (
+    <>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center', 
+      justifyContent: 'center', 
+      height: '100vh', 
+      padding: '0 10%',
+    }}>
+      <h1 style={{ textAlign: 'center', width: '100%' }}>{article.title}</h1>
+      <p style={{ textAlign: 'left', width: '100%' }}>{article.content}</p>
+    </div>
+    </>
+  );
+};
+
+export default ArticleDetailPage;

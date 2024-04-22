@@ -9,6 +9,7 @@ import ProfilePage from './pages/ProfilePage';
 import ArticlesPage from './pages/ArticlesPage';
 import EventsPage from './pages/EventsPage';
 
+import ArticleDetailPage from './pages/ArticleDetailPage';
 
 
 const AppRouter: React.FC = () => {
@@ -21,8 +22,9 @@ const AppRouter: React.FC = () => {
                 <Route path="/events" element={<EventsPage />} />
                 <Route path="/find-services" element={<LocatorPage />} />
                 <Route path="/login" element={<LoginPage />} />
-
                 <Route path="/profile" element={<ProfilePage />} />
+
+                <Route path="/articles/:articleId" element={<ArticleDetailPage />} />
             </Routes>
         </Router>
     );
