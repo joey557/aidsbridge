@@ -8,14 +8,18 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../store/account-slice';
 
 
 
 const BrandBar: React.FC = () => {
   const { t } = useTranslation('common');
   const [searchTerm, setSearchTerm] = useState('');
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
+  const user = useSelector(selectCurrentUser);
 
   const handleSearch = () => {
     console.log('Performing search for:', searchTerm);
@@ -23,7 +27,7 @@ const BrandBar: React.FC = () => {
   };
 
   const handleFindServices = () => {
-    navigate('/find-services'); 
+    navigate('/find-services');
   };
 
   const handleArticlesPage = () => {
@@ -35,7 +39,7 @@ const BrandBar: React.FC = () => {
   }
 
   const handleAccountClick = () => {
-    if (isAuthenticated) {
+    if (user != null) {
       navigate('/profile');  // Navigate to profile page if logged in
     } else {
       navigate('/login');    // Navigate to login page if not logged in
@@ -54,7 +58,7 @@ const BrandBar: React.FC = () => {
         </Typography>
 
         {/* Navigation links */}
-        
+
         <div style={{ display: 'flex', justifyContent: 'center', flexGrow: 1 }}>
           <Button color="inherit" style={{ margin: '0 20px' }} onClick={handleArticlesPage}>{t('appbar.articles.label')}</Button>
           <Button color="inherit" style={{ marginRight: '20px'}} onClick={handleEventsPage}>{t('appbar.events.label')}</Button>
@@ -81,7 +85,7 @@ const BrandBar: React.FC = () => {
           </IconButton>
         </div>
         {/* Account icon */}
-        <div style={{ display: 'flex' , marginLeft:'40px'}}>
+        <div style={{ display: 'flex', marginLeft: '40px' }}>
           <IconButton color="inherit" onClick={handleAccountClick}>
             <AccountCircleIcon />
           </IconButton>

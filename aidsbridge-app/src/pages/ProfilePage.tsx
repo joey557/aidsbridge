@@ -5,6 +5,9 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import image from '../assets/profile.jpg'
+import { selectCurrentUser, clearAccount } from '../store/account-slice';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 
 interface TabPanelProps {
@@ -47,14 +50,22 @@ export default function VerticalTabs() {
     setValue(newValue);
   };
 
+  const user = useSelector(selectCurrentUser);
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(clearAccount());
+    console.log('Logged out', user);
+  }
+
   return (
-    <div style={{ 
+    <div style={{
       position: 'relative',
       height: '100vh',
       width: '100vw',
     }}>
       {/* Background div */}
-      <div style={{ 
+      <div style={{
         backgroundImage: `url(${image})`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
@@ -66,18 +77,18 @@ export default function VerticalTabs() {
         height: '100%'
       }} />
       {/* Content div */}
-      <div style={{ 
-        
+      <div style={{
+
         position: 'relative',
         height: '100%',
         paddingTop: '200px'  // Adjusted from marginTop to paddingTop
       }}>
-        <h1>Welcome</h1>
-        
+        <h1>Welcome {user?.userName}</h1>
+
         <Box
-          sx={{ flexGrow: 1, display: 'flex',marginLeft:'200px', height: 300 }}
+          sx={{ flexGrow: 1, display: 'flex', marginLeft: '200px', height: 300 }}
         >
-          
+
           <Tabs
             orientation="vertical"
             variant="scrollable"
@@ -89,6 +100,7 @@ export default function VerticalTabs() {
             <Tab label="Personal Profile" {...a11yProps(0)} />
             <Tab label="My Articles" {...a11yProps(1)} />
             <Tab label="My Events" {...a11yProps(2)} />
+            <button onClick={logout}>logout</button>
           </Tabs>
           <TabPanel value={value} index={0}>Item One</TabPanel>
           <TabPanel value={value} index={1}>Item Two</TabPanel>

@@ -10,10 +10,10 @@ import { AuthProvider } from './context/AuthContext';
 function App() {
   return (
     <>
-    <AuthProvider>
-      <CssBaseline />
-      <AppRouter />
-    </AuthProvider>
+      <AuthProvider>
+        <CssBaseline />
+        <AppRouter />
+      </AuthProvider>
     </>
   );
 }
