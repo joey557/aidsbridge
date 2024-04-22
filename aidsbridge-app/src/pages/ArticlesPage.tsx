@@ -45,7 +45,8 @@ export default function MediaCard() {
   };
 
   const handleArticleClick = (articleId: string) => {
-    navigate(`/articles/${articleId}`);
+    const articleImage = images[aidsArticles.find(a => a._id === articleId)?.imageId || ""]
+    navigate(`/articles/${articleId}`, { state: { articleImage } });
   };
 
   useEffect(() => {
@@ -110,7 +111,7 @@ export default function MediaCard() {
           </Card>
         ))}
       </div>
-      <ArticleDialog article={selectedArticle} open={open} onClose={handleClose} />
+      {/* <ArticleDialog article={selectedArticle} open={open} onClose={handleClose} /> */}
     </>
   );
 }

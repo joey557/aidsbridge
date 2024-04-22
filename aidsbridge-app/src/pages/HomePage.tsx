@@ -4,22 +4,19 @@ import HomePageArticle from "../components/homepage-article";
 import Statistic from "../components/react-countup";
 import { Box } from "@mui/material";
 import { getBackgroundStyle } from "../components/BackgroundStyle";
-import { useTranslation } from 'react-i18next';
-
+import { useTranslation } from "react-i18next";
 
 const HomePage: React.FC = () => {
-  
-
   const videoSrc = "https://youtube.com/embed/12vTnXekJu8";
   // const backgroundImageUrl =smileImage;
   const backgroundStyle = getBackgroundStyle(smileImage);
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
 
   return (
     <>
       <div style={backgroundStyle}>
         <h1>
-          {t('home.header')} <br /> {t('home.header1')}{" "}
+          {t("home.header")} <br /> {t("home.header1")}{" "}
         </h1>
       </div>
       <Box textAlign="center" marginTop="80px">
@@ -57,7 +54,13 @@ const HomePage: React.FC = () => {
           description="people died of AIDS-related illnesses in 2022"
         />
       </Box>
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <iframe
           width="560"
           height="315"
@@ -66,8 +69,8 @@ const HomePage: React.FC = () => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
-        <div style={{ width: '40%', padding: '0 20px' }}>
-          <p>
+        <div style={{ width: "40%", padding: "0 20px" }}>
+          <p style={{ fontSize: "18px", margin: "20px 0" }}>
             Learning the basics about HIV can keep you healthy and prevent HIV
             transmission. You can also download materials to share or watch
             videos on basic information about HIV.
