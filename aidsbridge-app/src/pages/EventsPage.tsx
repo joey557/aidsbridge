@@ -57,7 +57,7 @@ export default function EventsAccordion() {
           body: JSON.stringify({
             person: {
               peopleName: user.userName,  
-              accountId: user.accountId         
+              accountId: user.accountId      
             }
           })
         });

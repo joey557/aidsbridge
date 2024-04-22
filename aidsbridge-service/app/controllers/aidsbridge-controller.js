@@ -87,14 +87,14 @@ export const deleteEvent = async (req, res) => {
 
 export const updateEvent = async (req, res) => {
     try {
-        const updatedEvent = await Event.findByIdAndUpdate(
-            eventId,
-            { $push: { people: person } },  
-            { new: true, safe: true, upsert: false }
-          );
+        // const updatedEvent = await Event.findByIdAndUpdate(
+        //     eventId,
+        //     { $push: { people: person } },  
+        //     { new: true, safe: true, upsert: false }
+        //   );
         const id = req.params.id;
         const content = { ...req.body };
-        //const updatedEvent = await eventService.updateEvents(id, content);
+        const updatedEvent = await eventService.updateEvents(id, content);
         setResponse(updatedEvent, res);
     } catch (error) {
         setError(error, res);

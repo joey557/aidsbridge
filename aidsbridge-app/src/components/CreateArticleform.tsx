@@ -43,7 +43,7 @@ const CreateArticleForm: React.FC<CreateArticleFormProps> = ({
 
   
 
-  const uploadFileToServer = (file) => {
+  const uploadFileToServer = (file: string | Blob) => {
     const formData = new FormData();
     formData.append("eventsImage", file);
 
