@@ -16,6 +16,11 @@ const eventsSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
+  creatorId: {
+    type: String,
+    required: true,
+    trim: true
+  },
   people: [
     {
       peopleName: {
