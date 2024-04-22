@@ -41,6 +41,36 @@ export default function EventsAccordion() {
     const { t } = useTranslation('common');
     const user = useSelector(selectCurrentUser);
 
+
+    const handleJoinEvent = async (eventId: string) => {
+      if (!user) {
+        alert("Please log in to join the event.");
+        return;
+      }
+    
+      try {
+        const response = await fetch(`http://localhost:3000/aidsbridge/events/${eventId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            person: {
+              peopleName: user.userName,  
+              accountId: user.accountId         
+            }
+          })
+        });
+        if (!response.ok) {
+          throw new Error('Failed to join the event');
+        }
+        alert('You have joined the event successfully!');
+      } catch (error) {
+        console.error('Error joining event:', error);
+        alert('Error joining the event.');
+      }
+    };
+
     React.useEffect(() => {
       getEvents().then(events => {
         dispatch(loadEvents(events));
@@ -91,7 +121,7 @@ export default function EventsAccordion() {
                 </ul>
               </AccordionDetails>
               <AccordionActions style={{ position: 'absolute', bottom: '10px', right: '10px' }}>
-                <Button color="primary" variant="contained">Join</Button>
+              <Button color="primary" variant="contained" onClick={() => handleJoinEvent(event._id)}>Join</Button>
               </AccordionActions>
             </CustomAccordion>
           ))}

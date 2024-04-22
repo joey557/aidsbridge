@@ -86,15 +86,26 @@ export const deleteEvent = async (req, res) => {
 }
 
 export const updateEvent = async (req, res) => {
+    const eventId = req.params.id; 
+    const person = req.body.person;
+
     try {
-        const id = req.params.id;
-        const content = { ...req.body };
-        const updatedEvent = await eventService.updateEvents(id, content);
-        setResponse(updatedEvent, res);
+        const updatedEvent = await Event.findByIdAndUpdate(
+            eventId,
+            { $push: { people: person } },  
+            { new: true, safe: true, upsert: false }
+        );
+
+        if (updatedEvent) {
+            res.status(200).json(updatedEvent);
+        } else {
+            throw new Error('Event not found or update failed');
+        }
     } catch (error) {
-        setError(error, res);
+        res.status(500).json({ message: 'Failed to update event', error: error.toString() });
     }
 }
+
 
 export const filterEvents = async (req, res) => {
     try {
