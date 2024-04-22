@@ -7,7 +7,7 @@ i18n.use(HttpApi)
     .use(initReactI18next)
     .init({
         lng: 'ta',
-        fallbackLng: 'en',
+        fallbackLng: 'ta',
         ns: ['common'],
         backend: {
             loadPath: '/i18n/{{lng}}/{{ns}}.json'

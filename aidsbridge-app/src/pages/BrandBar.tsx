@@ -7,10 +7,12 @@ import logo from '../assets/web-logo.png';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
+import { useTranslation } from 'react-i18next';
 
 
 
 const BrandBar: React.FC = () => {
+  const { t } = useTranslation('common');
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate(); 
   const { isAuthenticated } = useAuth();
@@ -54,9 +56,9 @@ const BrandBar: React.FC = () => {
         {/* Navigation links */}
         
         <div style={{ display: 'flex', justifyContent: 'center', flexGrow: 1 }}>
-          <Button color="inherit" style={{ margin: '0 20px' }} onClick={handleArticlesPage}>ARTICLES</Button>
-          <Button color="inherit" style={{ marginRight: '20px'}} onClick={handleEventsPage}>EVENTS</Button>
-          <Button color="inherit" onClick={handleFindServices}>FIND SERVICES</Button>
+          <Button color="inherit" style={{ margin: '0 20px' }} onClick={handleArticlesPage}>{t('appbar.articles.label')}</Button>
+          <Button color="inherit" style={{ marginRight: '20px'}} onClick={handleEventsPage}>{t('appbar.events.label')}</Button>
+          <Button color="inherit" onClick={handleFindServices}>{t('appbar.events.findservice')}</Button>
           
         </div>
 

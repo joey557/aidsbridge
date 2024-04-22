@@ -1,7 +1,7 @@
 {
-    "appbar.title.label": "课程注册",
-    "appbar.login.label": "登陆",
-    "course.table.link.button.label": "链接",
+    "appbar.articles.label": "文章",
+    "appbar.events.label": "活动",
+    "appbar.events.findservice": "搜寻服务",
     "courses.table.view.button.label": "查看",
     "course.table.register.button.label": "注册",
     "courses.table.column.id": "Id",
