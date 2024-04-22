@@ -5,17 +5,18 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-//import { Article } from '../models/article';
+
 import { getBackgroundStyle } from "../components/BackgroundStyle";
 import readingImage from "../assets/reading.jpg";
-
-import { AppDispatch } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadArticles, getAllArticles } from '../store/articles-slice';
 import { getArticles } from '../services/articles-service';
 import React from 'react';
 import { selectCurrentUser } from '../store/account-slice';
 import { useTranslation } from 'react-i18next';
+import { Article } from "../models/article";
+import { AppDispatch } from '../store';
+import ArticleDialog from '../components/ArticleDialog';
 
 export default function MediaCard() {
   //const [articles, setArticles] = useState<Array<Article>>([]);
@@ -26,6 +27,20 @@ export default function MediaCard() {
   const dispatch = useDispatch<AppDispatch>();
   const aidsArticles = useSelector(getAllArticles());
   const user = useSelector(selectCurrentUser);
+
+  const [open, setOpen] = useState(false);
+  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+
+
+  const handleClickOpen = (article: React.SetStateAction<Article | null>) => {
+    setSelectedArticle(article);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedArticle(null);
+  };
 
   useEffect(() => {
     getArticles().then((articles) => {
@@ -83,12 +98,13 @@ export default function MediaCard() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small">Share</Button>
-              <Button size="small">Learn More</Button>
+              {/* <Button size="small">Share</Button> */}
+              <Button size="small" onClick={() => handleClickOpen(article)}>Learn More</Button>
             </CardActions>
           </Card>
         ))}
       </div>
+      <ArticleDialog article={selectedArticle} open={open} onClose={handleClose} />
     </>
   );
 }

@@ -11,6 +11,10 @@ import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../store/account-slice';
+import { getAllArticles, getArticleByTitle } from '../store/articles-slice';
+import { Article } from '../models/article';
+import { useSelector } from 'react-redux';
+import { AppState } from '../store';
 
 
 
@@ -19,12 +23,16 @@ const BrandBar: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
+  const articles = useSelector(getAllArticles());
   const user = useSelector(selectCurrentUser);
 
   const handleSearch = () => {
     console.log('Performing search for:', searchTerm);
+    console.log('All articles:', articles);
     // TODO: Add search logic here
   };
+
+
 
   const handleFindServices = () => {
     navigate('/find-services');
