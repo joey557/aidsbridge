@@ -8,7 +8,7 @@ import image from '../assets/profile.jpg'
 import { selectCurrentUser, clearAccount } from '../store/account-slice';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-
+import { useNavigate } from 'react-router-dom';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -18,6 +18,7 @@ interface TabPanelProps {
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
+  
 
   return (
     <div
@@ -37,6 +38,7 @@ function TabPanel(props: TabPanelProps) {
 }
 
 function a11yProps(index: number) {
+  
   return {
     id: `vertical-tab-${index}`,
     'aria-controls': `vertical-tabpanel-${index}`,
@@ -45,6 +47,7 @@ function a11yProps(index: number) {
 
 export default function VerticalTabs() {
   const [value, setValue] = React.useState(0);
+  const navigate = useNavigate();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -56,6 +59,7 @@ export default function VerticalTabs() {
   const logout = () => {
     dispatch(clearAccount());
     console.log('Logged out', user);
+    navigate('/');
   }
 
   return (
