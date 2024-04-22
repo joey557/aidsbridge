@@ -59,7 +59,7 @@ export default function CreateEventForm() {
 
   return (
     <>
-      <Button variant="contained" color="primary" onClick={handleOpen} style={{ position: 'fixed', bottom: 20, right: 20 }}>
+      <Button variant="contained" color="primary" onClick={handleOpen} >
         <AddIcon /> Add Event
       </Button>
       <Dialog open={open} onClose={() => setOpen(false)} maxWidth="sm" fullWidth>
