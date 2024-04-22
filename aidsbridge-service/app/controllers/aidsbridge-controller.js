@@ -118,6 +118,17 @@ export const userLogin = async (req, res) => {
     }
 }
 
+export const getUser = async (req, res) => {
+    try {
+        //const accountId = req.params.accountId;
+        const user = await userService.getUser();
+        setResponse(user, res);
+    } catch (error) {
+        setError(error, res);
+    }
+
+}
+
 export const userRegister = async (req, res) => {
     try {
         const { userName, accountId, password } = req.body;

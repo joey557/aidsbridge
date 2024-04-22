@@ -5,4 +5,5 @@ export interface Article {
     creater: string;
     createdDate: Date;
     imageId: string;
+    userId: string;
   }

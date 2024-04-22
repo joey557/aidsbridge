@@ -8,6 +8,8 @@ const router = express.Router();
 //login
 router.route("/login").post(aidsbridgeController.userLogin);
 
+router.route("/user").get(aidsbridgeController.getUser);
+
 //register
 router.route("/register").post(aidsbridgeController.userRegister);
 

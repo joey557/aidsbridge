@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import AccordionActions from '@mui/material/AccordionActions';
-import { Event } from '../models/event';
+//import { Event } from '../models/event';
 import { useEffect } from 'react';
 import { getBackgroundStyle } from '../components/BackgroundStyle';
 import image from "../assets/event.jpg";
@@ -15,16 +15,31 @@ import CreateEventForm from '../components/CreateEventform';
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
 
+
+import { AppDispatch } from '../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadEvents, getAllEvents } from '../store/events-slice';
+import { getEvents } from '../services/events-service';
+
 export default function EventsAccordion() {
-    const [events, setEvents] = React.useState<Array<Event>>([]);
+    //const [events, setEvents] = React.useState<Array<Event>>([]);
+
+    const dispatch = useDispatch<AppDispatch>();
+    const aidsEvents = useSelector(getAllEvents());
 
     useEffect(() => {
-        // Fetch events from the backend server
-        fetch('http://localhost:3000/aidsbridge/events')
-          .then(response => response.json())
-          .then(data => setEvents(data))
-          .catch(error => console.error('Error fetching events:', error));
-      }, []);
+      getEvents().then((events) => {
+        dispatch(loadEvents(events))
+      })
+    })
+
+    // useEffect(() => {
+    //     // Fetch events from the backend server
+    //     fetch('http://localhost:3000/aidsbridge/events')
+    //       .then(response => response.json())
+    //       .then(data => setEvents(data))
+    //       .catch(error => console.error('Error fetching events:', error));
+    //   }, []);
 
     return (
       <ThemeProvider theme={theme}>
@@ -40,7 +55,7 @@ export default function EventsAccordion() {
           <CreateEventForm />
         </div>
         <div style={{ marginTop: '100px', textAlign: 'center' }}>
-          {events.map(event => (
+          {aidsEvents.map(event => (
             <Accordion key={event._id}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}

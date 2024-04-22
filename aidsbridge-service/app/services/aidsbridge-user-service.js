@@ -52,6 +52,15 @@ export const login = async (accountId, password) => {
   }
 }
 
+export const getUser = async () => {
+  try {
+    const user = await Users.find({}).exec();
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export const changePassword = async (accountId, oldPassword, newPassword) => {
   try {
     const user = await Users.findOne({ accountId });

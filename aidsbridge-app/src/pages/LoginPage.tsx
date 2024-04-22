@@ -1,27 +1,30 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Button,
-  TextField,
-  Container,
-  Box,
-  Tabs,
-  Tab,
-} from "@mui/material";
+import { Button, TextField, Container, Box, Tabs, Tab } from "@mui/material";
 import loginImage from "../assets/login.jpg";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
 import { useAuth } from "../context/AuthContext";
-
-
-
-
+// import { fetchUser } from "../store/user-slice";
+// import { useDispatch } from "react-redux";
+// import { useEffect } from "react";
+// import { AppDispatch } from "../store";
+// import { AppState } from "../store";
+// import { useSelector } from "react-redux";
 
 const LoginPage: React.FC = () => {
   const [tabValue, setTabValue] = useState(0);
-  const [userName, setUserName] = useState("");
+  const [userName, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  // const dispatch = useDispatch<AppDispatch>();
+  // useEffect(() => {
+  //   dispatch(fetchUser());
+  // }, [dispatch]);
+
+  // const { userName } = useSelector((state: AppState) => state.user);
+  // console.log(userName);
 
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -29,20 +32,19 @@ const LoginPage: React.FC = () => {
   //generate short id for user
   function generateShortID() {
     const timestamp = Date.now().toString(36);
-    const random = Math.random().toString(36).substr(2, 5); 
+    const random = Math.random().toString(36).substr(2, 5);
     return timestamp + random;
   }
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
-  
 
   // const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
   //   event.preventDefault();
   //   // If sucessful
-    
-  //   navigate('/profile');  
+
+  //   navigate('/profile');
   // };
 
   const handleRegister = (event: React.FormEvent<HTMLFormElement>) => {
@@ -75,7 +77,11 @@ const LoginPage: React.FC = () => {
     }
   };
 
-  const userRegister = async (userName: string, accountId: string, password: string) => {
+  const userRegister = async (
+    userName: string,
+    accountId: string,
+    password: string
+  ) => {
     try {
       const response = await fetch(
         "http://localhost:3000/aidsbridge/register",
@@ -137,7 +143,7 @@ const LoginPage: React.FC = () => {
                 autoComplete="userName"
                 autoFocus
                 value={userName}
-                onChange={(e) => setUserName(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
               />
               <TextField
                 variant="outlined"
@@ -179,7 +185,7 @@ const LoginPage: React.FC = () => {
                 autoComplete="userName"
                 autoFocus
                 value={userName}
-                onChange={(e) => setUserName(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
               />
               <TextField
                 variant="outlined"
@@ -194,7 +200,7 @@ const LoginPage: React.FC = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <TextField 
+              <TextField
                 variant="outlined"
                 margin="normal"
                 required
