@@ -64,6 +64,7 @@ classDiagram
       +String title
       +String content
       +DateTime publishDate
+      +Image image
     }
     class Event {
       +String name
@@ -82,6 +83,7 @@ classDiagram
       +String title
       +String content
       +DateTime sharedDate
+      +Image image
     }
     class Address {
       +String street
