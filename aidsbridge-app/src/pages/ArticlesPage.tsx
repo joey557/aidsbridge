@@ -122,9 +122,9 @@ export default function MediaCard() {
               Create Article
             </Button>
           </div>
-
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
           {aidsArticles.map((article) => (
-            <Card key={article._id} sx={{ maxWidth: 345 }}>
+            <Card key={article._id} sx={{ maxWidth: 300, flex: '0 0 345px' }}>
               <CardMedia
                 sx={{ height: 140 }}
                 image={images[article.imageId] || "/static/images/default.jpg"}
@@ -151,6 +151,7 @@ export default function MediaCard() {
               <CreateArticleForm open={isFormOpen} onClose={handleCloseForm} />
             </Card>
           ))}
+          </div>
         </div>
       </div>
       {/* <ArticleDialog article={selectedArticle} open={open} onClose={handleClose} /> */}
