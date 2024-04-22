@@ -14,10 +14,11 @@ import { getArticles } from '../services/articles-service';
 import React from 'react';
 import { selectCurrentUser } from '../store/account-slice';
 import { useTranslation } from 'react-i18next';
-import { Article } from "../models/article";
+//import { Article } from "../models/article";
 import { AppDispatch } from '../store';
-import ArticleDialog from '../components/ArticleDialog';
+//import ArticleDialog from '../components/ArticleDialog';
 import { useNavigate } from 'react-router-dom';
+
 export default function MediaCard() {
   //const [articles, setArticles] = useState<Array<Article>>([]);
   const [images, setImages] = useState<{ [key: string]: string }>({});
@@ -26,23 +27,21 @@ export default function MediaCard() {
 
   const dispatch = useDispatch<AppDispatch>();
   const aidsArticles = useSelector(getAllArticles());
-  const user = useSelector(selectCurrentUser);
+  //const user = useSelector(selectCurrentUser);
 
-  const [open, setOpen] = useState(false);
-  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+  // const [open, setOpen] = useState(false);
+  // const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
   const navigate = useNavigate();
 
+  // const handleClickOpen = (article: React.SetStateAction<Article | null>) => {
+  //   setSelectedArticle(article);
+  //   setOpen(true);
+  // };
 
-
-  const handleClickOpen = (article: React.SetStateAction<Article | null>) => {
-    setSelectedArticle(article);
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    setSelectedArticle(null);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  //   setSelectedArticle(null);
+  // };
 
   const handleArticleClick = (articleId: string) => {
     const articleImage = images[aidsArticles.find(a => a._id === articleId)?.imageId || ""]
@@ -53,7 +52,7 @@ export default function MediaCard() {
     getArticles().then((articles) => {
       dispatch(loadArticles(articles));
     });
-    console.log('Current user:', user);
+    //console.log('Current user:', user);
   })
 
   useEffect(() => {

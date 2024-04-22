@@ -8,7 +8,6 @@ const ArticleDetailPage: React.FC = () => {
   // 使用 useSelector 获取文章数据
   const location = useLocation();
   const articleImage = location.state?.articleImage;
-  console.log('Article image:', articleImage);
   const article = useSelector((state: AppState) => state.articles.find(a => a._id === articleId));
 
   if (!article) {

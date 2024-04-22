@@ -20,8 +20,4 @@ export const getAllArticles = (): ((state: AppState) => ArticlesState) => {
     return (state: AppState) => state.articles;
 }
 
-export const getArticleByTitle = (title: string | undefined): ((state: AppState) => Article | undefined) => {
-    return (state: AppState) => state.articles.find((article) => article.title === title);
-}
-
 export default articlesSlice.reducer;
