@@ -64,7 +64,6 @@ classDiagram
       +String username
       +String email
       +String password
-      +String role
     }
     class Article {
       +String title
@@ -80,17 +79,13 @@ classDiagram
       +String name
       +Address address
     }
-    class Treatment {
-      +String name
-      +String description
-    }
     class Consultation {
       +DateTime time
       +String type
     }
     class Story {
       +String title
-      +String narrative
+      +String content
       +DateTime sharedDate
     }
     class Address {
@@ -104,6 +99,6 @@ classDiagram
     User "1" -- "0..*" Story : shares >
     User "0..*" -- "0..*" Consultation : books >
     Resource "1" -- "1" Address : located at >
-    Article "1" -- "0..1" Treatment : discusses >
+
     
 ```
