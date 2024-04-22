@@ -5,6 +5,8 @@ import loginImage from "../assets/login.jpg";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
 import { useAuth } from "../context/AuthContext";
+import { setAccount } from "../store/account-slice";
+import { useDispatch } from "react-redux";
 // import { fetchUser } from "../store/user-slice";
 // import { useDispatch } from "react-redux";
 // import { useEffect } from "react";
@@ -28,6 +30,7 @@ const LoginPage: React.FC = () => {
 
   const navigate = useNavigate();
   const { login } = useAuth();
+  const dispatch = useDispatch();
 
   //generate short id for user
   function generateShortID() {
@@ -66,6 +69,8 @@ const LoginPage: React.FC = () => {
         body: JSON.stringify({ accountId: userName, password }),
       });
       if (response.ok) {
+        const userData = await response.json();
+        dispatch(setAccount(userData));
         login(); // update login state
         navigate("/profile"); // Navigate after successful login
         console.log("Login successful");

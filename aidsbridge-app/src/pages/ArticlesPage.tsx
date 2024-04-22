@@ -1,4 +1,4 @@
-import { useEffect} from 'react';
+import { useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -13,21 +13,24 @@ import { AppDispatch } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadArticles, getAllArticles } from '../store/articles-slice';
 import { getArticles } from '../services/articles-service';
-
+import React from 'react';
+import { selectCurrentUser } from '../store/account-slice';
 
 
 export default function MediaCard() {
   //const [articles, setArticles] = useState<Array<Article>>([]);
   //const [images, setImages] = useState<{[key: string]: string}>({});
   const backgroundStyle = getBackgroundStyle(readingImage);
-  
+
   const dispatch = useDispatch<AppDispatch>();
   const aidsArticles = useSelector(getAllArticles());
+  const user = useSelector(selectCurrentUser);
 
   useEffect(() => {
     getArticles().then((articles) => {
       dispatch(loadArticles(articles));
-    })
+    });
+    console.log('Current user:', user);
   })
 
   // useEffect(() => {
@@ -58,11 +61,11 @@ export default function MediaCard() {
   return (
     <>
       <div style={backgroundStyle}>
-          <h2>
+        <h2>
           Explore, Learn, Advocate: <br /> Uniting Voices Against HIV/AIDS
-          </h2>
-        </div>
-      <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', marginTop: '100px'}}>
+        </h2>
+      </div>
+      <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', marginTop: '100px' }}>
         {aidsArticles.map((article) => (
           <Card key={article._id} sx={{ maxWidth: 345 }}>
             <CardMedia

@@ -2,11 +2,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { articlesSlice } from "./articles-slice";
 import { eventsSlice } from "./events-slice";
+import { usersSlice } from "./user-slice";
+import { accountSlice } from "./account-slice";
 
 export const store = configureStore({
   reducer: {
     [articlesSlice.name]: articlesSlice.reducer,
     [eventsSlice.name]: eventsSlice.reducer,
+    [usersSlice.name]: usersSlice.reducer,
+    [accountSlice.name]: accountSlice.reducer,
   },
 });
 
