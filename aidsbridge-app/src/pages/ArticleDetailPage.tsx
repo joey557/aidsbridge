@@ -24,6 +24,7 @@ const ArticleDetailPage: React.FC = () => {
       justifyContent: 'center', 
       height: '100vh', 
       padding: '0 10%',
+      marginTop: '100px',
     }}>
       <h1 style={{ textAlign: 'center', width: '100%' }}>{article.title}</h1>
       <img src={articleImage} alt="Article" />

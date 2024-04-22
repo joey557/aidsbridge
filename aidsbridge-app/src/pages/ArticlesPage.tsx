@@ -88,7 +88,16 @@ export default function MediaCard() {
           {t('article.header.line')} <br /> {t('article.header.line2')}
         </h2>
       </div>
-      <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', marginTop: '100px' }}>
+      <div style={{ 
+        display: 'flex', 
+        // justifyContent: 'center', // 
+        gap: '20px', 
+        flexWrap: 'wrap', 
+        marginTop: '100px', 
+        maxWidth: '80%', // 
+        marginLeft: 'auto',
+        marginRight: 'auto' 
+      }}>
         {aidsArticles.map((article) => (
           <Card key={article._id} sx={{ maxWidth: 345 }}>
             <CardMedia
