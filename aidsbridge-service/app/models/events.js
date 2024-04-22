@@ -28,7 +28,7 @@ const eventsSchema = new mongoose.Schema({
         required: true,
         trim: true
       },
-      accounrtId: {
+      accountId: {
         type: String,
         required: true,
         trim: true
