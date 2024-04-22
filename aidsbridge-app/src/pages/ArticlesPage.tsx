@@ -14,10 +14,11 @@ import { getArticles } from '../services/articles-service';
 import React from 'react';
 import { selectCurrentUser } from '../store/account-slice';
 import { useTranslation } from 'react-i18next';
-//import { Article } from "../models/article";
+import { Article } from "../models/article";
 import { AppDispatch } from '../store';
-//import ArticleDialog from '../components/ArticleDialog';
+import ArticleDialog from '../components/ArticleDialog';
 import { useNavigate } from 'react-router-dom';
+import CreateArticleForm from '../components/CreateArticleform';
 
 export default function MediaCard() {
   //const [articles, setArticles] = useState<Array<Article>>([]);
@@ -27,11 +28,13 @@ export default function MediaCard() {
 
   const dispatch = useDispatch<AppDispatch>();
   const aidsArticles = useSelector(getAllArticles());
-  //const user = useSelector(selectCurrentUser);
+  const user = useSelector(selectCurrentUser);
 
-  // const [open, setOpen] = useState(false);
-  // const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+  const [open, setOpen] = useState(false);
+  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
   const navigate = useNavigate();
+
+
 
   // const handleClickOpen = (article: React.SetStateAction<Article | null>) => {
   //   setSelectedArticle(article);
@@ -43,6 +46,23 @@ export default function MediaCard() {
   //   setSelectedArticle(null);
   // };
 
+  const [isFormOpen, setFormOpen] = useState(false);
+
+    const handleOpenForm = () => {
+        setFormOpen(true);
+    };
+
+    const handleCloseForm = () => {
+        setFormOpen(false);
+    };
+
+
+
+
+
+
+
+
   const handleArticleClick = (articleId: string) => {
     const articleImage = images[aidsArticles.find(a => a._id === articleId)?.imageId || ""]
     navigate(`/articles/${articleId}`, { state: { articleImage } });
@@ -52,7 +72,7 @@ export default function MediaCard() {
     getArticles().then((articles) => {
       dispatch(loadArticles(articles));
     });
-    //console.log('Current user:', user);
+    console.log('Current user:');
   })
 
   useEffect(() => {
@@ -87,6 +107,7 @@ export default function MediaCard() {
           {t('article.header.line')} <br /> {t('article.header.line2')}
         </h2>
       </div>
+      
       <div style={{ 
         display: 'flex', 
         // justifyContent: 'center', // 
@@ -97,8 +118,17 @@ export default function MediaCard() {
         marginLeft: 'auto',
         marginRight: 'auto' 
       }}>
+      <div>
+        <div style={{marginBottom:'100px'}}>
+          <Button variant="contained" color="primary" onClick={handleOpenForm}>
+                Create Article
+          </Button>
+        </div>
+      
         {aidsArticles.map((article) => (
+          
           <Card key={article._id} sx={{ maxWidth: 345 }}>
+            
             <CardMedia
               sx={{ height: 140 }}
               image={images[article.imageId] || "/static/images/default.jpg"}
@@ -116,8 +146,11 @@ export default function MediaCard() {
               {/* <Button size="small">Share</Button> */}
               <Button size="small" onClick={() => handleArticleClick(article._id)}>Learn More</Button>
             </CardActions>
+            
+            <CreateArticleForm open={isFormOpen} onClose={handleCloseForm} />
           </Card>
         ))}
+        </div>
       </div>
       {/* <ArticleDialog article={selectedArticle} open={open} onClose={handleClose} /> */}
     </>
