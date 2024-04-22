@@ -55,10 +55,12 @@ export default function EventsAccordion() {
           <br />{t('event.header.line2')}
         </h1>
       </div>
+      <EventPageArticle/>
       <div style={{ marginLeft: '100px' }}>
         <div>
           <CreateEventForm />
         </div>
+
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
