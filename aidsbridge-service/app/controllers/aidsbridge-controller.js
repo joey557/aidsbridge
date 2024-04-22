@@ -163,3 +163,20 @@ export const getImages = async (req, res) => {
         setError(err, res);
     }
 }
+
+export const updateUserInfo = async (req, res) => {
+    try {
+        const accountId = req.params.accountId;
+        const { userName, newPassword } = req.body;
+
+        const success = await userService.updateUserDetails(accountId, { userName, newPassword });
+
+        if (success) {
+            setResponse({ message: "User details updated successfully" }, res);
+        } else {
+            throw new Error("Failed to update user details");
+        }
+    } catch (error) {
+        setError(error, res);
+    }
+}

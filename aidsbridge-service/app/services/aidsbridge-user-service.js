@@ -1,5 +1,5 @@
-import bcrypt from 'bcryptjs';
-import Users from '../models/users.js';
+import bcrypt from "bcryptjs";
+import Users from "../models/users.js";
 
 export const register = async (userData) => {
   try {
@@ -8,7 +8,7 @@ export const register = async (userData) => {
     // Check if the account ID is already in use
     const existingUser = await Users.findOne({ accountId });
     if (existingUser) {
-      throw new Error('Account ID is already in use');
+      throw new Error("Account ID is already in use");
     }
 
     // Encrypt the password
@@ -19,7 +19,7 @@ export const register = async (userData) => {
     const newUser = new Users({
       userName,
       accountId,
-      password: hashedPassword
+      password: hashedPassword,
     });
 
     // Save the user and return
@@ -28,29 +28,29 @@ export const register = async (userData) => {
   } catch (error) {
     throw error;
   }
-}
+};
 
 export const login = async (accountId, password) => {
   try {
     // Check if the account exists
     const user = await Users.findOne({ accountId });
     if (!user) {
-      throw new Error('Account does not exist');
+      throw new Error("Account does not exist");
     }
 
     // Validate the password
     const isMatch = await bcrypt.compare(password, user.password);
     //const isMatch = password === user.password;
-    
+
     if (!isMatch) {
-      throw new Error('Incorrect password');
+      throw new Error("Incorrect password");
     }
 
-    return user;  // Login successful, return user information
+    return user; // Login successful, return user information
   } catch (error) {
     throw error;
   }
-}
+};
 
 export const getUser = async () => {
   try {
@@ -59,19 +59,19 @@ export const getUser = async () => {
   } catch (error) {
     throw error;
   }
-}
+};
 
 export const changePassword = async (accountId, oldPassword, newPassword) => {
   try {
     const user = await Users.findOne({ accountId });
     if (!user) {
-      throw new Error('User does not exist');
+      throw new Error("User does not exist");
     }
 
     // Validate the old password
     const isMatch = await bcrypt.compare(oldPassword, user.password);
     if (!isMatch) {
-      throw new Error('Old password is incorrect');
+      throw new Error("Old password is incorrect");
     }
 
     // Encrypt the new password
@@ -82,10 +82,35 @@ export const changePassword = async (accountId, oldPassword, newPassword) => {
     user.password = hashedPassword;
     await user.save();
 
-    return true;  // Password update successful
+    return true; // Password update successful
   } catch (error) {
     throw error;
   }
-}
+};
 
+export const updateUserDetails = async (accountId, updates) => {
+  try {
+    const { userName, newPassword } = updates;
 
+    const user = await Users.findOne({ accountId });
+    if (!user) {
+      throw new Error("User does not exist");
+    }
+
+    if (userName) {
+      user.userName = userName;
+    }
+
+    if (newPassword) {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(newPassword, salt);
+      user.password = hashedPassword;
+    }
+
+    await user.save();
+
+    return true;
+  } catch (error) {
+    throw error;
+  }
+};

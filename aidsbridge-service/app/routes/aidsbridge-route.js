@@ -45,4 +45,7 @@ router
   .post(upload.single("eventsImage"), aidsbridgeController.uploadImage)
   .get(aidsbridgeController.getImages);
 
+  
+router.route("/user/update/:accountId").put(aidsbridgeController.updateUserInfo);
+
 export default router;
