@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../store/account-slice';
 import { getAllArticles, getArticleByTitle } from '../store/articles-slice';
 import { Article } from '../models/article';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { AppState } from '../store';
 
 
@@ -69,9 +69,9 @@ const BrandBar: React.FC = () => {
 
         <div style={{ display: 'flex', justifyContent: 'center', flexGrow: 1 }}>
           <Button color="inherit" style={{ margin: '0 20px' }} onClick={handleArticlesPage}>{t('appbar.articles.label')}</Button>
-          <Button color="inherit" style={{ marginRight: '20px'}} onClick={handleEventsPage}>{t('appbar.events.label')}</Button>
+          <Button color="inherit" style={{ marginRight: '20px' }} onClick={handleEventsPage}>{t('appbar.events.label')}</Button>
           <Button color="inherit" onClick={handleFindServices}>{t('appbar.events.findservice')}</Button>
-          
+
         </div>
 
         {/* Search input and icon */}

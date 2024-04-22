@@ -2,16 +2,28 @@ import React, { useState } from 'react';
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import SendIcon from '@mui/icons-material/Send';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../store/account-slice';
 
 export default function CreateEventForm() {
   const [open, setOpen] = useState(false);
+  const user = useSelector(selectCurrentUser);
   const [eventData, setEventData] = useState({
     title: '',
     content: '',
     creator: '',
-    createdDate: new Date().toISOString().slice(0, 10), 
-    eventsDate: new Date().toISOString().slice(0, 10) 
+    createdDate: new Date().toISOString().slice(0, 10),
+    eventsDate: new Date().toISOString().slice(0, 10)
   });
+
+  const handleOpen = () => {
+    if (user === null) {
+      alert('Please login to create an event.');
+      return;
+    } else {
+      setOpen(true);
+    }
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -47,7 +59,7 @@ export default function CreateEventForm() {
 
   return (
     <>
-      <Button variant="contained" color="primary" onClick={() => setOpen(true)} style={{ position: 'fixed', bottom: 20, right: 20 }}>
+      <Button variant="contained" color="primary" onClick={handleOpen} style={{ position: 'fixed', bottom: 20, right: 20 }}>
         <AddIcon /> Add Event
       </Button>
       <Dialog open={open} onClose={() => setOpen(false)} maxWidth="sm" fullWidth>
