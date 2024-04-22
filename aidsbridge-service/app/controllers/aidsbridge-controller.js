@@ -149,7 +149,7 @@ export const uploadImage = async (req, res) => {
             }
         });
         await saveImage.save();
-        setResponse({ message: 'Image saved' }, res);
+        setResponse({ message: 'Image saved', imageId: saveImage._id}, res);
     } catch (err) {
         setError(err, res);
     }

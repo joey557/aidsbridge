@@ -8,23 +8,23 @@ import Typography from "@mui/material/Typography";
 
 import { getBackgroundStyle } from "../components/BackgroundStyle";
 import readingImage from "../assets/reading.jpg";
-import { useDispatch, useSelector } from 'react-redux';
-import { loadArticles, getAllArticles } from '../store/articles-slice';
-import { getArticles } from '../services/articles-service';
-import React from 'react';
-import { selectCurrentUser } from '../store/account-slice';
-import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from "react-redux";
+import { loadArticles, getAllArticles } from "../store/articles-slice";
+import { getArticles } from "../services/articles-service";
+import React from "react";
+import { selectCurrentUser } from "../store/account-slice";
+import { useTranslation } from "react-i18next";
 import { Article } from "../models/article";
-import { AppDispatch } from '../store';
-import ArticleDialog from '../components/ArticleDialog';
-import { useNavigate } from 'react-router-dom';
-import CreateArticleForm from '../components/CreateArticleform';
+import { AppDispatch } from "../store";
+//import ArticleDialog from '../components/ArticleDialog';
+import { useNavigate } from "react-router-dom";
+import CreateArticleForm from "../components/CreateArticleform";
 
 export default function MediaCard() {
   //const [articles, setArticles] = useState<Array<Article>>([]);
   const [images, setImages] = useState<{ [key: string]: string }>({});
   const backgroundStyle = getBackgroundStyle(readingImage);
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
 
   const dispatch = useDispatch<AppDispatch>();
   const aidsArticles = useSelector(getAllArticles());
@@ -33,8 +33,6 @@ export default function MediaCard() {
   const [open, setOpen] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
   const navigate = useNavigate();
-
-
 
   // const handleClickOpen = (article: React.SetStateAction<Article | null>) => {
   //   setSelectedArticle(article);
@@ -48,23 +46,17 @@ export default function MediaCard() {
 
   const [isFormOpen, setFormOpen] = useState(false);
 
-    const handleOpenForm = () => {
-        setFormOpen(true);
-    };
+  const handleOpenForm = () => {
+    setFormOpen(true);
+  };
 
-    const handleCloseForm = () => {
-        setFormOpen(false);
-    };
-
-
-
-
-
-
-
+  const handleCloseForm = () => {
+    setFormOpen(false);
+  };
 
   const handleArticleClick = (articleId: string) => {
-    const articleImage = images[aidsArticles.find(a => a._id === articleId)?.imageId || ""]
+    const articleImage =
+      images[aidsArticles.find((a) => a._id === articleId)?.imageId || ""];
     navigate(`/articles/${articleId}`, { state: { articleImage } });
   };
 
@@ -72,8 +64,8 @@ export default function MediaCard() {
     getArticles().then((articles) => {
       dispatch(loadArticles(articles));
     });
-    console.log('Current user:');
-  })
+    //console.log("Current user:");
+  });
 
   useEffect(() => {
     // Fetch images and map them by imageId
@@ -104,52 +96,61 @@ export default function MediaCard() {
     <>
       <div style={backgroundStyle}>
         <h2>
-          {t('article.header.line')} <br /> {t('article.header.line2')}
+          {t("article.header.line")} <br /> {t("article.header.line2")}
         </h2>
       </div>
-      
-      <div style={{ 
-        display: 'flex', 
-        // justifyContent: 'center', // 
-        gap: '20px', 
-        flexWrap: 'wrap', 
-        marginTop: '100px', 
-        maxWidth: '80%', // 
-        marginLeft: 'auto',
-        marginRight: 'auto' 
-      }}>
-      <div>
-        <div style={{marginBottom:'100px'}}>
-          <Button variant="contained" color="primary" onClick={handleOpenForm}>
-                Create Article
-          </Button>
-        </div>
-      
-        {aidsArticles.map((article) => (
-          
-          <Card key={article._id} sx={{ maxWidth: 345 }}>
-            
-            <CardMedia
-              sx={{ height: 140 }}
-              image={images[article.imageId] || "/static/images/default.jpg"}
-              title="Article Image"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {article.title}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {article.content.substring(0, 150) + "..."}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              {/* <Button size="small">Share</Button> */}
-              <Button size="small" onClick={() => handleArticleClick(article._id)}>Learn More</Button>
-            </CardActions>
-            
-            <CreateArticleForm open={isFormOpen} onClose={handleCloseForm} />
-          </Card>
-        ))}
+
+      <div
+        style={{
+          display: "flex",
+          // justifyContent: 'center', //
+          gap: "20px",
+          flexWrap: "wrap",
+          marginTop: "100px",
+          maxWidth: "80%", //
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
+      >
+        <div>
+          <div style={{ marginBottom: "100px" }}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleOpenForm}
+            >
+              Create Article
+            </Button>
+          </div>
+
+          {aidsArticles.map((article) => (
+            <Card key={article._id} sx={{ maxWidth: 345 }}>
+              <CardMedia
+                sx={{ height: 140 }}
+                image={images[article.imageId] || "/static/images/default.jpg"}
+                title="Article Image"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {article.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {article.content.substring(0, 150) + "..."}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                {/* <Button size="small">Share</Button> */}
+                <Button
+                  size="small"
+                  onClick={() => handleArticleClick(article._id || "")}
+                >
+                  Learn More
+                </Button>
+              </CardActions>
+
+              <CreateArticleForm open={isFormOpen} onClose={handleCloseForm} />
+            </Card>
+          ))}
         </div>
       </div>
       {/* <ArticleDialog article={selectedArticle} open={open} onClose={handleClose} /> */}

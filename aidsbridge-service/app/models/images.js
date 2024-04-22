@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const imgSchema = new mongoose.Schema({
+  //_id: mongoose.Schema.Types.ObjectId,
   name: String,
   img: {
     data: Buffer,
