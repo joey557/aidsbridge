@@ -2,13 +2,19 @@
     "appbar.articles.label": "文章",
     "appbar.events.label": "活动",
     "appbar.events.findservice": "搜寻服务",
-    "courses.table.view.button.label": "查看",
-    "course.table.register.button.label": "注册",
-    "courses.table.column.id": "Id",
-    "courses.table.column.name": "课程名称",
-    "courses.table.column.credits": "学分",
-    "courses.table.column.link": "链接",
-    "courses.table.column.view": "查看",
-    "courses.table.column.Register": "注册",
-    "button.back": "返回"
+    "login.login.button": "登陆",
+    "login.register.button": "注册",
+    "login.header": "治愈、支持、前进",
+    "article.header.line": "探索、学习、倡导",
+    "article.header.line2": "团结一致，共抗艾滋病",
+    "event.card.content": "活动内容",
+    "event.card.attendees": "参加者",
+    "event.header.line": "团结抗争： ",
+    "event.header.line2": "加入抗艾滋活动",
+    "locator.header": "你在旅途中并不孤单 ",
+    "locator.header2":"找到您附近的艾滋治疗服务",
+    "locator.header3": "请输入您的位置，以发现包括检测、治疗和支持设施在内的附近服务选项。",
+    "home.header": "为了保护所有人的健康,",
+    "home.header1": "保护所有人的权利"
+
 }

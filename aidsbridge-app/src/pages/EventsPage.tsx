@@ -14,7 +14,7 @@ import EventPageArticle from '../components/eventpage-article';
 import CreateEventForm from '../components/CreateEventform'; 
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
-
+import { useTranslation } from 'react-i18next';
 
 import { AppDispatch } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,7 +26,7 @@ export default function EventsAccordion() {
 
     const dispatch = useDispatch<AppDispatch>();
     const aidsEvents = useSelector(getAllEvents());
-
+    const { t } = useTranslation('common');
     useEffect(() => {
       getEvents().then((events) => {
         dispatch(loadEvents(events))
@@ -46,8 +46,8 @@ export default function EventsAccordion() {
       <>
         <div style={getBackgroundStyle(image)}>
           <h1 style={{textAlign: 'center'}}>
-            Unite in the Fight: 
-            <br />Join the Movement Against AIDS
+            {t('event.header.line')}
+            <br />{t('event.header.line2')}
           </h1>
         </div>
         <EventPageArticle />
@@ -66,11 +66,11 @@ export default function EventsAccordion() {
               </AccordionSummary>
               <AccordionDetails>
                 <Typography variant="subtitle1" component="h2">
-                  Event Content
+                  {t('event.card.content')}
                 </Typography>
                 <Typography paragraph>{event.content}</Typography>
                 <Typography variant="subtitle1" component="h2">
-                  Attendees
+                  {t('event.card.attendees')}
                 </Typography>
                 <ul>
                   {event.people.map(person => (

@@ -4,7 +4,7 @@ import HomePageArticle from "../components/homepage-article";
 import Statistic from "../components/react-countup";
 import { Box } from "@mui/material";
 import { getBackgroundStyle } from "../components/BackgroundStyle";
-
+import { useTranslation } from 'react-i18next';
 
 
 const HomePage: React.FC = () => {
@@ -13,12 +13,13 @@ const HomePage: React.FC = () => {
   const videoSrc = "https://youtube.com/embed/12vTnXekJu8";
   // const backgroundImageUrl =smileImage;
   const backgroundStyle = getBackgroundStyle(smileImage);
+  const { t } = useTranslation('common');
 
   return (
     <>
       <div style={backgroundStyle}>
         <h1>
-          To protect everyone’s health, <br /> protect everyone’s rights{" "}
+          {t('home.header')} <br /> {t('home.header1')}{" "}
         </h1>
       </div>
       <Box textAlign="center" marginTop="80px">

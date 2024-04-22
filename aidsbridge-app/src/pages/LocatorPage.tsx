@@ -3,25 +3,26 @@ import { Card, CardContent, CardMedia, Typography, Container, Box, Toolbar, Grid
 import { getBackgroundStyle } from '../components/BackgroundStyle';
 import doctor from '../assets/Doctor.jpg';
 import red from '../assets/red-aids.jpg';
-
+import { useTranslation } from 'react-i18next';
 
 
 
 const LocatorPage: React.FC = () => {
   const backgroundStyle = getBackgroundStyle(doctor);
+  const { t } = useTranslation('common');
 
   return (
     <>
       <div style={backgroundStyle}>
         <h1>
-          You're not alone in this journey 
+          {t('locator.header')}
         </h1>
       </div>
       <Container maxWidth="md" sx={{ mt: 4 }}>
         <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ mt: 4 }}>
-          <h2 style={{ marginBottom: '16px' }}>Find HIV/AIDS Services Near You</h2>
+          <h2 style={{ marginBottom: '16px' }}>{t('locator.header2')}</h2>
           <Typography variant="subtitle1" sx={{ mb: 2 }}>
-            Enter your location to discover nearby service options including testing, treatment, and support facilities.
+            {t('locator.header3')}
           </Typography>
 
           <Card variant="outlined" sx={{ p: 2, width: '100%', maxWidth: 600, mb: 3 }}>

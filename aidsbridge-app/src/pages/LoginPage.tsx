@@ -7,6 +7,7 @@ import theme from "../theme";
 import { useAuth } from "../context/AuthContext";
 import { setAccount } from "../store/account-slice";
 import { useDispatch } from "react-redux";
+import { useTranslation } from 'react-i18next';
 // import { fetchUser } from "../store/user-slice";
 // import { useDispatch } from "react-redux";
 // import { useEffect } from "react";
@@ -15,6 +16,7 @@ import { useDispatch } from "react-redux";
 // import { useSelector } from "react-redux";
 
 const LoginPage: React.FC = () => {
+  const { t } = useTranslation('common');
   const [tabValue, setTabValue] = useState(0);
   const [userName, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -125,7 +127,7 @@ const LoginPage: React.FC = () => {
           }}
         >
           <Box textAlign="center" sx={{ width: "100%" }}>
-            <h2>Healing, Supporting, Advancing</h2>
+            <h2>{t('login.header')}</h2>
           </Box>
           <Tabs value={tabValue} onChange={handleTabChange} centered>
             <Tab label="Login" />
@@ -169,7 +171,7 @@ const LoginPage: React.FC = () => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Login
+                {t('login.login.button')}
               </Button>
             </Box>
           )}
@@ -224,7 +226,7 @@ const LoginPage: React.FC = () => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Register
+                {t('login.register.button')}
               </Button>
             </Box>
           )}

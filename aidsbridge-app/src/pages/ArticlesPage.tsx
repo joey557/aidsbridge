@@ -15,11 +15,13 @@ import { loadArticles, getAllArticles } from '../store/articles-slice';
 import { getArticles } from '../services/articles-service';
 import React from 'react';
 import { selectCurrentUser } from '../store/account-slice';
+import { useTranslation } from 'react-i18next';
 
 export default function MediaCard() {
   //const [articles, setArticles] = useState<Array<Article>>([]);
   const [images, setImages] = useState<{ [key: string]: string }>({});
   const backgroundStyle = getBackgroundStyle(readingImage);
+  const { t } = useTranslation('common');
 
   const dispatch = useDispatch<AppDispatch>();
   const aidsArticles = useSelector(getAllArticles());
@@ -61,7 +63,7 @@ export default function MediaCard() {
     <>
       <div style={backgroundStyle}>
         <h2>
-          Explore, Learn, Advocate: <br /> Uniting Voices Against HIV/AIDS
+          {t('article.header.line')} <br /> {t('article.header.line2')}
         </h2>
       </div>
       <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', marginTop: '100px' }}>
