@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 // import { AppState } from "../store";
 // import { useSelector } from "react-redux";
 
+//login page design
 const LoginPage: React.FC = () => {
   const { t } = useTranslation('common');
   const [tabValue, setTabValue] = useState(0);
@@ -51,7 +52,7 @@ const LoginPage: React.FC = () => {
 
   //   navigate('/profile');
   // };
-
+  //handle the registering process 
   const handleRegister = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (password !== confirmPassword) {

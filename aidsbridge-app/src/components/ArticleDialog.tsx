@@ -4,6 +4,9 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 
+// The article card
+
+
 interface Article {
   title: string;
   content: string;

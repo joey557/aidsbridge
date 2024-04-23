@@ -19,6 +19,7 @@ import { getBackgroundStyle } from '../components/BackgroundStyle';
 import image from "../assets/event.jpg";
 import theme from "../theme";
 
+//ui design for all the events cards
 const CustomAccordion = styled(MuiAccordion)(({ theme }) => ({
   backgroundColor: theme.palette.grey[200],  
   margin: '10px',
@@ -35,6 +36,7 @@ const CustomAccordion = styled(MuiAccordion)(({ theme }) => ({
   },
 }));
 
+//let users join the events after they login
 export default function EventsAccordion() {
     const dispatch = useDispatch();
     const aidsEvents = useSelector(getAllEvents());

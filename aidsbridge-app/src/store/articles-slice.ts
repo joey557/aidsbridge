@@ -5,6 +5,7 @@ import { AppState } from ".";
 export type ArticlesState = Article[];
 const initiateState: ArticlesState = [];
 
+// Create a slice for articles-related functionalities.
 export const articlesSlice = createSlice({
   name: "articles",
   initialState: initiateState,

@@ -2,11 +2,11 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import HttpApi from 'i18next-http-backend';
 
-
+//translation to Chinese
 i18n.use(HttpApi)
     .use(initReactI18next)
     .init({
-        lng: 'ta',
+        lng: 'en',
         fallbackLng: 'en',
         ns: ['common'],
         backend: {

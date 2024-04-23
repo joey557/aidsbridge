@@ -12,6 +12,7 @@ const HomePage: React.FC = () => {
   const backgroundStyle = getBackgroundStyle(smileImage);
   const { t } = useTranslation("common");
 
+  //render for home page
   return (
     <>
       <div style={backgroundStyle}>

@@ -19,6 +19,7 @@ import { deleteArticle, updateArticle } from "../store/articles-slice";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../store/account-slice";
 
+//user profile's article after user login 
 interface Article {
   _id?: string;
   title: string;
@@ -43,7 +44,7 @@ const ArticlesPanel: React.FC<ArticlesPanelProps> = ({ articles }) => {
     content: "",
   });
 
-  const handleClickOpen = (article) => {
+  const handleClickOpen = (article:any) => {
     setEditData({
       _id: article._id,
       title: article.title,

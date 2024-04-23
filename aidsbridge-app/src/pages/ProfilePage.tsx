@@ -46,6 +46,7 @@ function a11yProps(index: number) {
   };
 }
 
+//profile page after users log in
 export default function VerticalTabs() {
   const [value, setValue] = useState(0);
   const [newPassword, setNewPassword] = useState("");

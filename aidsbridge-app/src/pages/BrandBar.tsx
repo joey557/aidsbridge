@@ -26,7 +26,7 @@ import { AppDispatch } from '../store';
 import { loadEvents} from '../store/events-slice';
 import { getEvents } from '../services/events-service';
 
-
+//brandbar design for the whole website
 const BrandBar: React.FC = () => {
   const { t } = useTranslation("common");
   const [searchTerm, setSearchTerm] = useState("");
@@ -36,7 +36,7 @@ const BrandBar: React.FC = () => {
 
   //get all articles
   const dispatch = useDispatch<AppDispatch>();
-
+  
   const aidsArticles = useSelector(getAllArticles());
   useEffect(() => {
     getArticles().then((articles) => {

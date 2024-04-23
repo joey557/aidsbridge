@@ -2,6 +2,7 @@ import React from 'react';
 import CountUp from 'react-countup';
 import { Typography, Box } from '@mui/material';
 
+//set up count for pages
 interface StatisticProps {
     
     endValue: number;

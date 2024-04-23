@@ -5,6 +5,7 @@ import { eventsSlice } from "./events-slice";
 import { usersSlice } from "./user-slice";
 import { accountSlice } from "./account-slice";
 
+//reducers
 export const store = configureStore({
   reducer: {
     [articlesSlice.name]: articlesSlice.reducer,

@@ -1,5 +1,6 @@
 import Events from '../models/events.js';
 
+//similar as articles but to events
 export const readEvents = async () => {
     return await Events.find({}).exec();
 }

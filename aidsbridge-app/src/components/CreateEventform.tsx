@@ -5,6 +5,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../store/account-slice';
 
+//add event button on events page
 export default function CreateEventForm() {
   const [open, setOpen] = useState(false);
   const user = useSelector(selectCurrentUser);
@@ -32,7 +33,7 @@ export default function CreateEventForm() {
       [name]: value
     }));
   };
-
+  //add detail of the event to back-end
   const handleSubmit = async () => {
     const { title, content, creator, createdDate, eventsDate } = eventData;
     const response = await fetch('http://localhost:3000/aidsbridge/events', {

@@ -1,5 +1,6 @@
 import React from "react";
 
+//style for event page headers and backgrounds
 const EventPageArticle: React.FC = () => {
   return (
     <div

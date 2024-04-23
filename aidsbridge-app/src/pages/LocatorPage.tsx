@@ -6,7 +6,7 @@ import red from '../assets/red-aids.jpg';
 import { useTranslation } from 'react-i18next';
 
 
-
+//find service page 
 const LocatorPage: React.FC = () => {
   const backgroundStyle = getBackgroundStyle(doctor);
   const { t } = useTranslation('common');

@@ -6,7 +6,7 @@ import { Typography, Accordion, AccordionSummary, AccordionDetails, Button } fro
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { selectCurrentUser } from "../store/account-slice";
 
-
+//user's event panel after their login
 const ProfileEvents = () => {
     const events = useSelector(getAllEvents());
     const user = useSelector(selectCurrentUser);

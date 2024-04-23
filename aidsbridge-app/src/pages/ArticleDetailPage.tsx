@@ -5,7 +5,7 @@ import { AppState } from '../store';
 
 const ArticleDetailPage: React.FC = () => {
   const { articleId } = useParams<{ articleId: string }>();
-  // 使用 useSelector 获取文章数据
+  //use userselector to get all the articles
   const location = useLocation();
   const articleImage = location.state?.articleImage;
   const article = useSelector((state: AppState) => state.articles.find(a => a._id === articleId));
@@ -13,7 +13,7 @@ const ArticleDetailPage: React.FC = () => {
   if (!article) {
     return <div>Article not found</div>;
   }
-
+  //render for article details
   return (
     <>
     <div style={{

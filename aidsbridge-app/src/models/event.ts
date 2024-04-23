@@ -1,3 +1,4 @@
+//model for event
 export interface EventPerson {
     peopleName: string;
     accountId: string;

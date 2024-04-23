@@ -1,3 +1,5 @@
+//Background image and line 
+
 const getBackgroundStyle = (imageUrl: string) => ({
     backgroundImage: `url(${imageUrl})`,
     backgroundSize: "cover",

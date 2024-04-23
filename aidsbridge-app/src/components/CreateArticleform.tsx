@@ -14,10 +14,14 @@ import { styled } from "@mui/material/styles";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useNavigate } from "react-router-dom";
 
+
+
+//Create new article button
 interface CreateArticleFormProps {
   open: boolean;
   onClose: () => void;
 }
+
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -60,7 +64,7 @@ const CreateArticleForm: React.FC<CreateArticleFormProps> = ({
       .catch((error) => console.error("Error:", error));
   };
 
-  const handleFileChange = (event) => {
+  const handleFileChange = (event:any) => {
     const file = event.target.files[0];
     uploadFileToServer(file);
   };

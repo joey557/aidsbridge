@@ -20,10 +20,12 @@ import { AppDispatch } from "../store";
 import { useNavigate } from "react-router-dom";
 import CreateArticleForm from "../components/CreateArticleform";
 
+//articles page 
 export default function MediaCard() {
   //const [articles, setArticles] = useState<Array<Article>>([]);
   const [images, setImages] = useState<{ [key: string]: string }>({});
   const backgroundStyle = getBackgroundStyle(readingImage);
+  //international translation to Chinese
   const { t } = useTranslation("common");
 
   const dispatch = useDispatch<AppDispatch>();

@@ -5,6 +5,7 @@ import * as userService from "../services/aidsbridge-user-service.js";
 import fs from "fs";
 import imageModel from "../models/images.js";
 
+//controllers for all the communication with front end
 export const readArticles = async (req, res) => {
     try {
         const articles = await articleService.readArticles();

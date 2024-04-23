@@ -1,5 +1,6 @@
 import React from "react";
 
+//articles for home page contexts
 const HomePageArticle: React.FC = () => {
   return (
     <div
