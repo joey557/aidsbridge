@@ -1,3 +1,4 @@
+// ProfileEvents.tsx
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { getAllEvents } from '../store/events-slice';
@@ -20,7 +21,7 @@ const ProfileEvents = () => {
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography paragraph>{event.content}</Typography>
-                        <Typography paragraph>{event.creator}</Typography>
+                        
                     </AccordionDetails>
                 </Accordion>
             ))}

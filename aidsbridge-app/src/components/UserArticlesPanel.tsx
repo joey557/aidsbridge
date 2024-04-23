@@ -88,7 +88,7 @@ const ArticlesPanel: React.FC<ArticlesPanelProps> = ({ articles }) => {
                     backgroundColor: '#A9ACB3'
                   }
                 }}
-                onClick={() => handleDelete(article._id || '')}
+                // onClick={() => handleDelete(article._id || '')}
               >
                 UPDATE
               </Button>
