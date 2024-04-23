@@ -4,7 +4,7 @@ info:
   summary: The REST service for managing events and handling user participation.
   version: 'v1.0'
 servers:
-  - url: http://localhost:3001
+  - url: http://localhost:3000
 paths:
   /events:
     get:
@@ -102,40 +102,6 @@ paths:
         500:
           description: Internal Server Error
 
-  /events/{eventId}/attendees:
-    post:
-      operationId: registerAttendee
-      summary: Register an attendee for an event
-      parameters:
-        - name: eventId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: The unique identifier of the event
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AttendeeRegistration'
-            examples:
-              attendeeRegistration:
-                value:
-                  userId: "12345"
-                  name: "John Doe"
-      responses:
-        200:
-          description: Attendee registered successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Attendee'
-        400:
-          description: Bad Request
-        404:
-          description: Event not found
-
 components:
   schemas:
     Event:
@@ -143,7 +109,8 @@ components:
       required:
         - title
         - description
-        - location
+        - creator
+        - attendees
         - date
       properties:
         id:
@@ -158,30 +125,16 @@ components:
           type: string
           description: Detailed description of the event
           example: "An event to raise awareness and support for AIDS."
-        location:
-          type: string
-          description: Venue of the event
-          example: "Conference Center, New York"
+        attendees:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attendee'
+          description: List of attendees registered for the event
         date:
           type: string
           format: date-time
           description: Date and time of the event
           example: "2022-12-01T09:00:00Z"
-    
-    AttendeeRegistration:
-      type: object
-      required:
-        - userId
-        - name
-      properties:
-        userId:
-          type: string
-          description: Unique identifier of the user who is registering
-          example: "123e4567-e89b-12d3-a456-426614174000"
-        name:
-          type: string
-          description: Name of the attendee
-          example: "John Doe"
     
     Attendee:
       type: object
@@ -194,10 +147,6 @@ components:
           type: string
           description: Name of the attendee
           example: "John Doe"
-        eventId:
-          type: string
-          description: Unique identifier of the event the attendee has registered for
-          example: "e1234567-e89b-12d3-a456-426614174000"
     
     Error:
       type: object

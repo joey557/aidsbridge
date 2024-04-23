@@ -2,11 +2,11 @@ openapi: 3.1.0
 info:
   title: Resource and Consultation Services API
   summary: The REST service for managing resources, consultations, and user stories.
-  version: 'v1.0'
+  version: "v1.0"
 servers:
-  - url: http://localhost:3001
+  - url: http://localhost:3000
 paths:
-  /resources:
+  /find-services:
     get:
       operationId: listResources
       summary: List all resources
@@ -18,95 +18,9 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Resource'
+                  $ref: "#/components/schemas/Resource"
         500:
           description: Internal Server Error
-    post:
-      operationId: createResource
-      summary: Create a new resource
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Resource'
-      responses:
-        201:
-          description: Resource created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Resource'
-        400:
-          description: Bad Request
-
-  /consultations:
-    get:
-      operationId: listConsultations
-      summary: Get all consultations
-      responses:
-        200:
-          description: An array of consultations
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Consultation'
-        500:
-          description: Internal Server Error
-    post:
-      operationId: bookConsultation
-      summary: Book a new consultation
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Consultation'
-      responses:
-        200:
-          description: Consultation booked successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Consultation'
-        400:
-          description: Bad Request
-
-  /stories:
-    get:
-      operationId: listStories
-      summary: List all user stories
-      responses:
-        200:
-          description: An array of user stories
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Story'
-        500:
-          description: Internal Server Error
-    post:
-      operationId: shareStory
-      summary: Share a new user story
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Story'
-      responses:
-        201:
-          description: Story shared successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Story'
-        400:
-          description: Bad Request
 
 components:
   schemas:
@@ -134,52 +48,6 @@ components:
           description: Contact information for the resource
           examples: "contact@examples.com"
 
-    Consultation:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the consultation
-          examples: "con"
-        topic:
-          type: string
-          description: The topic of the consultation
-          examples: "Coping Strategies"
-        dateTime:
-          type: string
-          format: date-time
-          description: Date and time of the consultation
-          examples: "2023-05-20T14:00:00Z"
-        specialist:
-          type: string
-          description: Name of the specialist providing the consultation
-          examples: "Dr. Smith"
-
-    Story:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the user story
-          examples: "story"
-        title:
-          type: string
-          description: Title of the user story
-          examples: "My Journey with HIV"
-        content:
-          type: string
-          description: Content of the user story
-          examples: "It was a challenging journey, but I learned a lot..."
-        author:
-          type: string
-          description: The author of the user story
-          examples: "John Doe"
-        dateShared:
-          type: string
-          format: date-time
-          description: Date when the story was shared
-          examples: "2023-04-25T12:34:56Z"
-
     Error:
       type: object
       properties:
@@ -191,4 +59,3 @@ components:
           type: string
           description: A message describing the error
           examples: "The requested resource was not found."
-
