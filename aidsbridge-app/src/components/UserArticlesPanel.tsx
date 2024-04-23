@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { deleteArticle } from "../store/articles-slice";
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../store/account-slice';
 
 interface Article {
   _id?: string;
@@ -28,6 +30,7 @@ interface ArticlesPanelProps {
 
 const ArticlesPanel: React.FC<ArticlesPanelProps> = ({ articles }) => {
   const dispatch = useDispatch();
+  const user = useSelector(selectCurrentUser);
 
   const handleDelete = async (articleId: string) => {
     try {
@@ -45,55 +48,41 @@ const ArticlesPanel: React.FC<ArticlesPanelProps> = ({ articles }) => {
   
   
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "40px",
-        justifyContent: "center",
-        maxWidth: "1000px",
-        margin: "auto",
-      }}
-    >
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '40px', justifyContent: 'center', maxWidth: '1000px', margin: 'auto' }}>
       {articles.map((article) => (
-        <Card
-          key={article._id}
-          sx={{
-            width: "calc(33% - 40px)",
-            maxWidth: 345,
-            minWidth: 300,
-            minHeight: 300,
-          }}
-        >
-          <CardMedia
-            sx={{ height: 140 }}
-            image={article.image || "/static/images/default.jpg"}
-            title="Article Image"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {article.title}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {article.content.substring(0, 150) + "..."}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button
-              size="small"
-              sx={{
-                backgroundColor: "#CFD2CD",
-                color: "black",
-                "&:hover": {
-                  backgroundColor: "#A9ACB3",
-                },
-              }}
-              onClick={() => handleDelete(article._id || "")}
-            >
-              DELETE
-            </Button>
-          </CardActions>
-        </Card>
+        user?.userName === article.creater && (
+          <Card key={article._id} sx={{ width: 'calc(33% - 40px)', maxWidth: 345, minWidth: 300, minHeight: 300 }}>
+            <CardMedia
+              sx={{ height: 140 }}
+              image={article.image || "/static/images/default.jpg"}
+              title="Article Image"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {article.title}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {article.content.substring(0, 150) + "..."}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button
+                size="small"
+                sx={{
+                  backgroundColor: '#CFD2CD',
+                  color: 'black',
+                  '&:hover': {
+                    backgroundColor: '#A9ACB3'
+                  }
+                }}
+                onClick={() => handleDelete(article._id || '')}
+              >
+                DELETE
+              </Button>
+            </CardActions>
+          </Card>
+        )
+
       ))}
     </div>
   );
