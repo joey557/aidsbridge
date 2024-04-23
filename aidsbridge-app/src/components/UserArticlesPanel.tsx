@@ -79,6 +79,19 @@ const ArticlesPanel: React.FC<ArticlesPanelProps> = ({ articles }) => {
               >
                 DELETE
               </Button>
+              <Button
+                size="small"
+                sx={{
+                  backgroundColor: '#CFD2CD',
+                  color: 'black',
+                  '&:hover': {
+                    backgroundColor: '#A9ACB3'
+                  }
+                }}
+                onClick={() => handleDelete(article._id || '')}
+              >
+                UPDATE
+              </Button>
             </CardActions>
           </Card>
         )

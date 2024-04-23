@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectCurrentUser, clearAccount } from "../store/account-slice";
 import image from "../assets/profile.jpg";
-
+import ProfileEvents from '../components/UserEvent';
 import { getAllArticles } from "../store/articles-slice";
 import ArticlesPanel from "../components/UserArticlesPanel";
 
@@ -190,8 +190,10 @@ export default function VerticalTabs() {
             </TabPanel>
             <TabPanel value={value} index={1} style={{ overflow: 'auto', height: '400px' }}><
               ArticlesPanel articles={aidsArticles} />
-              </TabPanel>
-            <TabPanel value={value} index={2}>Item Three</TabPanel>
+            </TabPanel>
+            <TabPanel value={value} index={2} style={{ overflow: 'auto', height: '400px' }}>
+                <ProfileEvents /> 
+            </TabPanel>
           </Box>
         </div>
       </div>
