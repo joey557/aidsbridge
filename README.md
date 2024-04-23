@@ -70,6 +70,7 @@ classDiagram
       +String name
       +DateTime date
       +String location
+      +String[] participants
     }
     class Resource {
       +String name
