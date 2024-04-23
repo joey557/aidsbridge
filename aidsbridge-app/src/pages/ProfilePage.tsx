@@ -10,6 +10,7 @@ import image from "../assets/profile.jpg";
 import ProfileEvents from '../components/UserEvent';
 import { getAllArticles } from "../store/articles-slice";
 import ArticlesPanel from "../components/UserArticlesPanel";
+import { getAllEvents } from "../store/events-slice";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -55,6 +56,7 @@ export default function VerticalTabs() {
   const dispatch = useDispatch();
 
   const aidsArticles = useSelector(getAllArticles());
+  //const aidsevents = useSelector(getAllEvents());
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);

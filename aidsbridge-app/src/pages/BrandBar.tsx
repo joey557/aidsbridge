@@ -23,6 +23,8 @@ import { getAllArticles, loadArticles } from "../store/articles-slice";
 // import { AppState } from "../store";
 import { getArticles } from "../services/articles-service";
 import { AppDispatch } from '../store';
+import { loadEvents} from '../store/events-slice';
+import { getEvents } from '../services/events-service';
 
 
 const BrandBar: React.FC = () => {
@@ -34,13 +36,19 @@ const BrandBar: React.FC = () => {
 
   //get all articles
   const dispatch = useDispatch<AppDispatch>();
+
   const aidsArticles = useSelector(getAllArticles());
   useEffect(() => {
     getArticles().then((articles) => {
       dispatch(loadArticles(articles));
     });
-    //console.log('Current user:', user);
   })
+
+  useEffect(() => {
+    getEvents().then(events => {
+      dispatch(loadEvents(events));
+    });
+  });
 
   //get all images
   useEffect(() => {

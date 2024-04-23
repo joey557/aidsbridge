@@ -201,8 +201,30 @@ const ArticlesPanel: React.FC<ArticlesPanelProps> = ({ articles }) => {
                   />
                 </DialogContent>
                 <DialogActions>
-                  <Button onClick={handleClose}>Cancel</Button>
-                  <Button onClick={handleSave}>Save</Button>
+                  <Button
+                    sx={{
+                      backgroundColor: "#CFD2CD",
+                      color: "black",
+                      "&:hover": {
+                        backgroundColor: "#A9ACB3",
+                      },
+                    }}
+                    onClick={handleClose}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    sx={{
+                      backgroundColor: "#CFD2CD",
+                      color: "black",
+                      "&:hover": {
+                        backgroundColor: "#A9ACB3",
+                      },
+                    }}
+                    onClick={handleSave}
+                  >
+                    Save
+                  </Button>
                 </DialogActions>
               </Dialog>
             </Card>
