@@ -15,18 +15,18 @@ interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
-  style?: React.CSSProperties; 
+  style?: React.CSSProperties;
 }
 
 function TabPanel(props: TabPanelProps) {
-  const { children, value, index, style,...other } = props;
+  const { children, value, index, style, ...other } = props;
   return (
     <div
       role="tabpanel"
       hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
-      style={{...style, display: value !== index ? 'none' : undefined}} //
+      style={{ ...style, display: value !== index ? "none" : undefined }} //
       {...other}
     >
       {value === index && (
@@ -55,7 +55,7 @@ export default function VerticalTabs() {
   const dispatch = useDispatch();
 
   const aidsArticles = useSelector(getAllArticles());
-  
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };

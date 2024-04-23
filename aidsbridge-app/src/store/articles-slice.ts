@@ -23,10 +23,17 @@ export const articlesSlice = createSlice({
         state.splice(index, 1);
       }
     },
+    updateArticle: (state, action: PayloadAction<{ id: string; newData: Partial<Article> }>) => {
+      const index = state.findIndex(article => article._id === action.payload.id);
+      if (index !== -1) {
+        state[index] = { ...state[index], ...action.payload.newData };
+      }
+    },
+    
   },
 });
 
-export const { loadArticles, deleteArticle } = articlesSlice.actions;
+export const { loadArticles, deleteArticle, updateArticle } = articlesSlice.actions;
 
 export const getAllArticles = (): ((state: AppState) => ArticlesState) => {
   return (state: AppState) => state.articles;

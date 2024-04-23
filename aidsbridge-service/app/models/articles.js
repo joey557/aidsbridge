@@ -16,11 +16,6 @@ const articlesSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  creatorId: {
-    type: String,
-    required: true,
-    trim: true
-  },
   createdDate: {
     type: Date,
     default: Date.now
