@@ -1,10 +1,15 @@
 import React from 'react';
 import { Card, CardActions, CardContent, CardMedia, Typography, Button } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../store/account-slice';
 
 interface Article {
   _id?: string;
   title: string;
   content: string;
+  creater: string;
+  createdDate: Date;
+  userId: string;
   image?: string;
 }
 
@@ -13,9 +18,12 @@ interface ArticlesPanelProps {
 }
 
 const ArticlesPanel: React.FC<ArticlesPanelProps> = ({ articles }) => {
-    return (
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '40px', justifyContent: 'center', maxWidth: '1000px', margin: 'auto' }}>
-        {articles.map((article) => (
+  const user = useSelector(selectCurrentUser);
+
+  return (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '40px', justifyContent: 'center', maxWidth: '1000px', margin: 'auto' }}>
+      {articles.map((article) => (
+        user?.userName === article.creater && (
           <Card key={article._id} sx={{ width: 'calc(33% - 40px)', maxWidth: 345, minWidth: 300, minHeight: 300 }}>
             <CardMedia
               sx={{ height: 140 }}
@@ -45,9 +53,11 @@ const ArticlesPanel: React.FC<ArticlesPanelProps> = ({ articles }) => {
               </Button>
             </CardActions>
           </Card>
-        ))}
-      </div>
-    );
-  };
-  
-  export default ArticlesPanel;
+        )
+
+      ))}
+    </div>
+  );
+};
+
+export default ArticlesPanel;
