@@ -8,6 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import { selectCurrentUser, clearAccount } from '../store/account-slice';
 import image from '../assets/profile.jpg'
 
+import { getAllArticles } from '../store/articles-slice';
+import ArticlesPanel from '../components/UserArticlesPanel'; 
+
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -48,6 +51,10 @@ export default function VerticalTabs() {
   const user = useSelector(selectCurrentUser);
   //console.log('User:', user);
   const dispatch = useDispatch();
+
+  const aidsArticles = useSelector(getAllArticles());//可能要改
+
+
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -102,7 +109,8 @@ export default function VerticalTabs() {
           top: 0,
           left: 0,
           width: '100%',
-          height: '100%',
+        
+          minHeight: '100vh',
           backgroundImage: `url(${image})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
@@ -156,7 +164,9 @@ export default function VerticalTabs() {
                 </Button>
               </Box>
             </TabPanel>
-            <TabPanel value={value} index={1}>Item Two</TabPanel>
+            <TabPanel value={value} index={1}><
+              ArticlesPanel articles={aidsArticles} />
+              </TabPanel>
             <TabPanel value={value} index={2}>Item Three</TabPanel>
           </Box>
         </div>
