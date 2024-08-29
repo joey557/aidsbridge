@@ -1,69 +1,98 @@
-import React, { useState } from 'react';
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import SendIcon from '@mui/icons-material/Send';
-import { useSelector } from 'react-redux';
-import { selectCurrentUser } from '../store/account-slice';
+import React, { useState } from "react";
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import SendIcon from "@mui/icons-material/Send";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../store/account-slice";
 
 //add event button on events page
 export default function CreateEventForm() {
   const [open, setOpen] = useState(false);
   const user = useSelector(selectCurrentUser);
   const [eventData, setEventData] = useState({
-    title: '',
-    content: '',
-    creator: '',
+    title: "",
+    content: "",
+    creator: "",
     createdDate: new Date().toISOString().slice(0, 10),
-    eventsDate: new Date().toISOString().slice(0, 10)
+    eventsDate: new Date().toISOString().slice(0, 10),
   });
 
   const handleOpen = () => {
     if (user === null) {
-      alert('Please login to create an event.');
+      alert("Please login to create an event.");
       return;
     } else {
+      setEventData((prevState) => ({
+        ...prevState,
+        creator: user.userName, // Set creator from current user
+      }));
       setOpen(true);
     }
-  }
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setEventData(prevState => ({
+    setEventData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
-  //add detail of the event to back-end
+
+  const handleClose = () => {
+    setOpen(false);
+    setEventData({
+      title: "",
+      content: "",
+      creator: "",
+      createdDate: new Date().toISOString().slice(0, 10),
+      eventsDate: new Date().toISOString().slice(0, 10),
+    });
+  };
+
   const handleSubmit = async () => {
     const { title, content, creator, createdDate, eventsDate } = eventData;
-    const response = await fetch('http://localhost:3000/aidsbridge/events', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        title,
-        content,
-        creator,
-        createdDate,
-        eventsDate
-      })
-    });
+    try {
+      console.log("Request Data:", eventData); // Print request data for debugging
+      const response = await fetch("http://localhost:3000/aidsbridge/events", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title,
+          content,
+          creator,
+          createdDate,
+          eventsDate,
+        }),
+      });
 
-    if (response.ok) {
-      alert('Event created successfully!');
-      setOpen(false); // Close the dialog
-    } else {
-      alert('Failed to create event.');
+      if (response.ok) {
+        alert("Event created successfully!");
+        handleClose(); // Close the dialog and reset the form
+      } else {
+        const errorText = await response.text();
+        alert(`Failed to create event: ${errorText}`);
+      }
+    } catch (error) {
+      console.error("Error creating event:", error);
+      alert("Failed to create event due to network error.");
     }
   };
 
   return (
     <>
-      <Button variant="contained" color="primary" onClick={handleOpen} >
+      <Button variant="contained" color="primary" onClick={handleOpen}>
         <AddIcon /> Add Event
       </Button>
-      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="sm" fullWidth>
+      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
         <DialogTitle>Create a New Event</DialogTitle>
         <DialogContent>
           <TextField
@@ -97,6 +126,7 @@ export default function CreateEventForm() {
             name="creator"
             value={eventData.creator}
             onChange={handleInputChange}
+            disabled // Disable this field to prevent user from changing it
           />
           <TextField
             margin="dense"
@@ -120,7 +150,11 @@ export default function CreateEventForm() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleSubmit} variant="contained" endIcon={<SendIcon />}>
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            endIcon={<SendIcon />}
+          >
             Create
           </Button>
         </DialogActions>
