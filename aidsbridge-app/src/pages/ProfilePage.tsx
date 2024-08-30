@@ -7,10 +7,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectCurrentUser, clearAccount } from "../store/account-slice";
 import image from "../assets/profile.jpg";
-import ProfileEvents from '../components/UserEvent';
+import ProfileEvents from "../components/UserEvent";
 import { getAllArticles } from "../store/articles-slice";
 import ArticlesPanel from "../components/UserArticlesPanel";
-import { getAllEvents } from "../store/events-slice";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -59,7 +58,7 @@ export default function VerticalTabs() {
   const aidsArticles = useSelector(getAllArticles());
   //const aidsevents = useSelector(getAllEvents());
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
@@ -191,11 +190,19 @@ export default function VerticalTabs() {
                 </Button>
               </Box>
             </TabPanel>
-            <TabPanel value={value} index={1} style={{ overflow: 'auto', height: '400px' }}><
-              ArticlesPanel articles={aidsArticles} />
+            <TabPanel
+              value={value}
+              index={1}
+              style={{ overflow: "auto", height: "400px" }}
+            >
+              <ArticlesPanel articles={aidsArticles} />
             </TabPanel>
-            <TabPanel value={value} index={2} style={{ overflow: 'auto', height: '400px' }}>
-                <ProfileEvents /> 
+            <TabPanel
+              value={value}
+              index={2}
+              style={{ overflow: "auto", height: "400px" }}
+            >
+              <ProfileEvents />
             </TabPanel>
           </Box>
         </div>

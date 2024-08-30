@@ -1,31 +1,45 @@
-import React from 'react';
-import { Card, CardContent, CardMedia, Typography, Container, Box, Toolbar, Grid } from '@mui/material';
-import { getBackgroundStyle } from '../components/BackgroundStyle';
-import doctor from '../assets/Doctor.jpg';
-import red from '../assets/red-aids.jpg';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Container,
+  Box,
+  Grid,
+} from "@mui/material";
+import { getBackgroundStyle } from "../components/BackgroundStyle";
+import doctor from "../assets/Doctor.jpg";
+import red from "../assets/red-aids.jpg";
+import { useTranslation } from "react-i18next";
 
-
-//find service page 
+//find service page
 const LocatorPage: React.FC = () => {
   const backgroundStyle = getBackgroundStyle(doctor);
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
 
   return (
     <>
       <div style={backgroundStyle}>
-        <h1>
-          {t('locator.header')}
-        </h1>
+        <h1>{t("locator.header")}</h1>
       </div>
       <Container maxWidth="md" sx={{ mt: 4 }}>
-        <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ mt: 4 }}>
-          <h2 style={{ marginBottom: '16px' }}>{t('locator.header2')}</h2>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          sx={{ mt: 4 }}
+        >
+          <h2 style={{ marginBottom: "16px" }}>{t("locator.header2")}</h2>
           <Typography variant="subtitle1" sx={{ mb: 2 }}>
-            {t('locator.header3')}
+            {t("locator.header3")}
           </Typography>
 
-          <Card variant="outlined" sx={{ p: 2, width: '100%', maxWidth: 600, mb: 3 }}>
+          <Card
+            variant="outlined"
+            sx={{ p: 2, width: "100%", maxWidth: 600, mb: 3 }}
+          >
             <locator-widget></locator-widget>
           </Card>
 
@@ -46,7 +60,9 @@ const LocatorPage: React.FC = () => {
                   </Typography> */}
                   <h3>Understanding HIV/AIDS</h3>
                   <Typography variant="body2" color="text.secondary">
-                    HIV  affects your immune system by destroying white blood cells that fight infection. Without treatment, HIV can lead to AIDS (acquired immunodeficiency syndrome).
+                    HIV affects your immune system by destroying white blood
+                    cells that fight infection. Without treatment, HIV can lead
+                    to AIDS (acquired immunodeficiency syndrome).
                   </Typography>
                 </CardContent>
               </Card>
@@ -62,10 +78,11 @@ const LocatorPage: React.FC = () => {
                   alt="Prevention Tips"
                 />
                 <CardContent>
-                  
                   <h3>Prevention Tips</h3>
                   <Typography variant="body2" color="text.secondary">
-                    Always use a new, clean needle if you inject drugs, practice safe sex using condoms, and consider PrEP medications if you're at high risk of HIV.
+                    Always use a new, clean needle if you inject drugs, practice
+                    safe sex using condoms, and consider PrEP medications if
+                    you're at high risk of HIV.
                   </Typography>
                 </CardContent>
               </Card>
@@ -82,10 +99,11 @@ const LocatorPage: React.FC = () => {
                 />
                 <CardContent>
                   <h3>Finding Support</h3>
-                    
-                  
+
                   <Typography variant="body2" color="text.secondary">
-                    Many communities offer support groups and counselors specifically trained to help with the psychological and emotional aspects of living with HIV/AIDS.
+                    Many communities offer support groups and counselors
+                    specifically trained to help with the psychological and
+                    emotional aspects of living with HIV/AIDS.
                   </Typography>
                 </CardContent>
               </Card>

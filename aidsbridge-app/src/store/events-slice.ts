@@ -5,19 +5,19 @@ import { AppState } from ".";
 export type EventsState = Event[];
 const initiateState: EventsState = [];
 export const eventsSlice = createSlice({
-    name: 'events',
-    initialState: initiateState,
-    reducers: {
-        loadEvents: (state: EventsState, action: PayloadAction<EventsState>) => {
-            return [...action.payload];
-        }
-    }
+  name: "events",
+  initialState: initiateState,
+  reducers: {
+    loadEvents: (_: EventsState, action: PayloadAction<EventsState>) => {
+      return [...action.payload];
+    },
+  },
 });
 
 export const { loadEvents } = eventsSlice.actions;
 
 export const getAllEvents = (): ((state: AppState) => EventsState) => {
-    return (state: AppState) => state.events;
-}
+  return (state: AppState) => state.events;
+};
 
 export default eventsSlice.reducer;

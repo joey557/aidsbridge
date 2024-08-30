@@ -16,7 +16,7 @@ import CreateEventForm from "../components/CreateEventform";
 import { getBackgroundStyle } from "../components/BackgroundStyle";
 import image from "../assets/event.jpg";
 import theme from "../theme";
-import { Event, EventPerson } from "../models/event";
+import { Event } from "../models/event";
 
 const CustomButton = styled(Button)(({ theme }) => ({
   marginBottom: "10px",

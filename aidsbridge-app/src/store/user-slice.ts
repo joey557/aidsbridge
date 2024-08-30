@@ -6,19 +6,19 @@ import { AppState } from ".";
 export type UsersState = User[];
 const initiateState: UsersState = [];
 export const usersSlice = createSlice({
-  name: 'users',
+  name: "users",
   initialState: initiateState,
   reducers: {
-    loadEvents: (state: UsersState, action: PayloadAction<UsersState>) => {
+    loadEvents: (_: UsersState, action: PayloadAction<UsersState>) => {
       return [...action.payload];
-    }
-  }
+    },
+  },
 });
 
 export const { loadEvents } = usersSlice.actions;
 
 export const getAllUsers = (): ((state: AppState) => UsersState) => {
   return (state: AppState) => state.users;
-}
+};
 
 export default usersSlice.reducer;

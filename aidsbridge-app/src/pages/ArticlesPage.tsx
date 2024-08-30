@@ -11,7 +11,7 @@ import readingImage from "../assets/reading.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { loadArticles, getAllArticles } from "../store/articles-slice";
 import { getArticles } from "../services/articles-service";
-import React from "react";
+
 import { selectCurrentUser } from "../store/account-slice";
 import { useTranslation } from "react-i18next";
 import { Article } from "../models/article";
@@ -20,7 +20,7 @@ import { AppDispatch } from "../store";
 import { useNavigate } from "react-router-dom";
 import CreateArticleForm from "../components/CreateArticleform";
 
-//articles page 
+//articles page
 export default function MediaCard() {
   //const [articles, setArticles] = useState<Array<Article>>([]);
   const [images, setImages] = useState<{ [key: string]: string }>({});
@@ -32,8 +32,8 @@ export default function MediaCard() {
   const aidsArticles = useSelector(getAllArticles());
   const user = useSelector(selectCurrentUser);
 
-  const [open, setOpen] = useState(false);
-  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+  // const [open, setOpen] = useState(false);
+  // const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
   const navigate = useNavigate();
 
   // const handleClickOpen = (article: React.SetStateAction<Article | null>) => {
@@ -105,15 +105,14 @@ export default function MediaCard() {
       <div
         style={{
           display: "flex",
-          justifyContent: 'center', 
-          alignItems:'flex-start',
+          justifyContent: "center",
+          alignItems: "flex-start",
           gap: "20px",
           flexWrap: "wrap",
           marginTop: "100px",
           maxWidth: "80%", //
           marginLeft: "auto",
           marginRight: "auto",
-          
         }}
       >
         <div>
@@ -126,36 +125,60 @@ export default function MediaCard() {
               Create Article
             </Button>
           </div>
-          <div style={{ display: "flex", justifyContent: 'center', alignItems: 'flex-start', gap: "20px", flexWrap: "wrap", marginTop: "50px", padding: "20px" }}>
-          {aidsArticles.map((article) => (
-            <Card key={article._id} sx={{ width: 345, height: 450, margin: 'auto', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', transition: '0.3s' }}>
-              <CardMedia
-              component="img"
-              height="194"
-              image={images[article.imageId] || "/static/images/default.jpg"}
-              alt="Article Image"
-            />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {article.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {article.content.substring(0, 150) + "..."}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                {/* <Button size="small">Share</Button> */}
-                <Button
-                  size="small"
-                  onClick={() => handleArticleClick(article._id || "")}
-                >
-                  Learn More
-                </Button>
-              </CardActions>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "flex-start",
+              gap: "20px",
+              flexWrap: "wrap",
+              marginTop: "50px",
+              padding: "20px",
+            }}
+          >
+            {aidsArticles.map((article) => (
+              <Card
+                key={article._id}
+                sx={{
+                  width: 345,
+                  height: 450,
+                  margin: "auto",
+                  boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                  transition: "0.3s",
+                }}
+              >
+                <CardMedia
+                  component="img"
+                  height="194"
+                  image={
+                    images[article.imageId] || "/static/images/default.jpg"
+                  }
+                  alt="Article Image"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {article.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {article.content.substring(0, 150) + "..."}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  {/* <Button size="small">Share</Button> */}
+                  <Button
+                    size="small"
+                    onClick={() => handleArticleClick(article._id || "")}
+                  >
+                    Learn More
+                  </Button>
+                </CardActions>
 
-              <CreateArticleForm open={isFormOpen} onClose={handleCloseForm} />
-            </Card>
-          ))}
+                <CreateArticleForm
+                  open={isFormOpen}
+                  onClose={handleCloseForm}
+                />
+              </Card>
+            ))}
           </div>
         </div>
       </div>

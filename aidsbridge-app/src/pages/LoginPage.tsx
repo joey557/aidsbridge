@@ -7,17 +7,11 @@ import theme from "../theme";
 import { useAuth } from "../context/AuthContext";
 import { setAccount } from "../store/account-slice";
 import { useDispatch } from "react-redux";
-import { useTranslation } from 'react-i18next';
-// import { fetchUser } from "../store/user-slice";
-// import { useDispatch } from "react-redux";
-// import { useEffect } from "react";
-// import { AppDispatch } from "../store";
-// import { AppState } from "../store";
-// import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 //login page design
 const LoginPage: React.FC = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
   const [tabValue, setTabValue] = useState(0);
   const [userName, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -42,17 +36,10 @@ const LoginPage: React.FC = () => {
     return timestamp + random;
   }
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
 
-  // const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   // If sucessful
-
-  //   navigate('/profile');
-  // };
-  //handle the registering process 
   const handleRegister = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (password !== confirmPassword) {
@@ -128,7 +115,7 @@ const LoginPage: React.FC = () => {
           }}
         >
           <Box textAlign="center" sx={{ width: "100%" }}>
-            <h2>{t('login.header')}</h2>
+            <h2>{t("login.header")}</h2>
           </Box>
           <Tabs value={tabValue} onChange={handleTabChange} centered>
             <Tab label="Login" />
@@ -172,7 +159,7 @@ const LoginPage: React.FC = () => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                {t('login.login.button')}
+                {t("login.login.button")}
               </Button>
             </Box>
           )}
@@ -227,7 +214,7 @@ const LoginPage: React.FC = () => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                {t('login.register.button')}
+                {t("login.register.button")}
               </Button>
             </Box>
           )}
