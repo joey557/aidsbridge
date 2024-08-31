@@ -12,9 +12,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadArticles, getAllArticles } from "../store/articles-slice";
 import { getArticles } from "../services/articles-service";
 
-import { selectCurrentUser } from "../store/account-slice";
+// import { selectCurrentUser } from "../store/account-slice";
 import { useTranslation } from "react-i18next";
-import { Article } from "../models/article";
+// import { Article } from "../models/article";
 import { AppDispatch } from "../store";
 //import ArticleDialog from '../components/ArticleDialog';
 import { useNavigate } from "react-router-dom";
@@ -30,7 +30,7 @@ export default function MediaCard() {
 
   const dispatch = useDispatch<AppDispatch>();
   const aidsArticles = useSelector(getAllArticles());
-  const user = useSelector(selectCurrentUser);
+  // const user = useSelector(selectCurrentUser);
 
   // const [open, setOpen] = useState(false);
   // const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
