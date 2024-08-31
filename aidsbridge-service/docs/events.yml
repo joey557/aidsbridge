@@ -2,9 +2,9 @@ openapi: 3.1.0
 info:
   title: Event Management and User Participation API
   summary: The REST service for managing events and handling user participation.
-  version: 'v1.0'
+  version: "v1.0"
 servers:
-  - url: http://localhost:3000
+  - url: https://aidsbridge-1.onrender.com
 paths:
   /events:
     get:
@@ -18,7 +18,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Event'
+                  $ref: "#/components/schemas/Event"
         500:
           description: Internal Server Error
 
@@ -30,7 +30,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Event'
+              $ref: "#/components/schemas/Event"
             examples:
               newEvent:
                 value:
@@ -44,7 +44,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Event'
+                $ref: "#/components/schemas/Event"
         400:
           description: Bad Request
 
@@ -64,7 +64,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Event'
+              $ref: "#/components/schemas/Event"
             examples:
               updateEvent:
                 value:
@@ -78,7 +78,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Event'
+                $ref: "#/components/schemas/Event"
         400:
           description: Bad Request
         404:
@@ -128,14 +128,14 @@ components:
         attendees:
           type: array
           items:
-            $ref: '#/components/schemas/Attendee'
+            $ref: "#/components/schemas/Attendee"
           description: List of attendees registered for the event
         date:
           type: string
           format: date-time
           description: Date and time of the event
           example: "2022-12-01T09:00:00Z"
-    
+
     Attendee:
       type: object
       properties:
@@ -147,7 +147,7 @@ components:
           type: string
           description: Name of the attendee
           example: "John Doe"
-    
+
     Error:
       type: object
       properties:

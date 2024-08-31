@@ -48,7 +48,7 @@ export default function EventsAccordion() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/aidsbridge/events/${eventId}`,
+        `https://aidsbridge-1.onrender.com/aidsbridge/events/${eventId}`,
         {
           method: "PUT",
           headers: {

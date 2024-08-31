@@ -2,9 +2,9 @@ openapi: 3.1.0
 info:
   title: Articles Management API
   summary: The REST service for managing educational articles on HIV/AIDS awareness.
-  version: 'v1.0'
+  version: "v1.0"
 servers:
-  - url: http://localhost:3000
+  - url: https://aidsbridge-1.onrender.com
 paths:
   /articles:
     get:
@@ -18,13 +18,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Article'
+                  $ref: "#/components/schemas/Article"
         500:
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
     post:
       operationId: createArticle
@@ -34,7 +34,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Article'
+              $ref: "#/components/schemas/Article"
             examples:
               articleExample:
                 summary: Example of an article
@@ -48,13 +48,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Article'
+                $ref: "#/components/schemas/Article"
         400:
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest'
+                $ref: "#/components/schemas/BadRequest"
 
   /articles/{articleId}:
     get:
@@ -73,13 +73,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Article'
+                $ref: "#/components/schemas/Article"
         404:
           description: Article not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
               examples:
                 notFoundExample:
                   value:
@@ -101,7 +101,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Article'
+              $ref: "#/components/schemas/Article"
             examples:
               articleUpdateExample:
                 summary: Example of an article update
@@ -115,19 +115,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Article'
+                $ref: "#/components/schemas/Article"
         400:
           description: Bad Request - Invalid input provided.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest'
+                $ref: "#/components/schemas/BadRequest"
         404:
           description: Article not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
 
     delete:
       operationId: deleteArticle
@@ -145,19 +145,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Article'
+                $ref: "#/components/schemas/Article"
         404:
           description: Article not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         500:
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
 components:
   schemas:

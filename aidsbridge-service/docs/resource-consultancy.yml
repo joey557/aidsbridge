@@ -4,7 +4,7 @@ info:
   summary: The REST service for managing resources, consultations, and user stories.
   version: "v1.0"
 servers:
-  - url: http://localhost:3000
+  - url: https://aidsbridge-1.onrender.com
 paths:
   /find-services:
     get:

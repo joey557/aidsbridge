@@ -22,9 +22,9 @@ import { getAllArticles, loadArticles } from "../store/articles-slice";
 //import { Article } from "../models/article";
 // import { AppState } from "../store";
 import { getArticles } from "../services/articles-service";
-import { AppDispatch } from '../store';
-import { loadEvents} from '../store/events-slice';
-import { getEvents } from '../services/events-service';
+import { AppDispatch } from "../store";
+import { loadEvents } from "../store/events-slice";
+import { getEvents } from "../services/events-service";
 
 //brandbar design for the whole website
 const BrandBar: React.FC = () => {
@@ -36,16 +36,16 @@ const BrandBar: React.FC = () => {
 
   //get all articles
   const dispatch = useDispatch<AppDispatch>();
-  
+
   const aidsArticles = useSelector(getAllArticles());
   useEffect(() => {
     getArticles().then((articles) => {
       dispatch(loadArticles(articles));
     });
-  })
+  });
 
   useEffect(() => {
-    getEvents().then(events => {
+    getEvents().then((events) => {
       dispatch(loadEvents(events));
     });
   });
@@ -53,7 +53,7 @@ const BrandBar: React.FC = () => {
   //get all images
   useEffect(() => {
     // Fetch images and map them by imageId
-    fetch("http://localhost:3000/aidsbridge/upload")
+    fetch("https://aidsbridge-1.onrender.com/aidsbridge/upload")
       .then((response) => response.json())
       .then((data) => {
         const imageMap = data.reduce(
@@ -82,7 +82,7 @@ const BrandBar: React.FC = () => {
     // TODO: Add search logic here
     //console.log("Performing search for:", searchTerm);
     const article = aidsArticles.find((a) => a.title === searchTerm);
-    const articleImage = images[article?.imageId || ""]
+    const articleImage = images[article?.imageId || ""];
     if (article) {
       navigate(`/articles/${article._id}`, { state: { articleImage } });
     } else {

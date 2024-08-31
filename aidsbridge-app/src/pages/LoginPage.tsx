@@ -53,11 +53,14 @@ const LoginPage: React.FC = () => {
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/aidsbridge/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ accountId: userName, password }),
-      });
+      const response = await fetch(
+        "https://aidsbridge-1.onrender.com/aidsbridge/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ accountId: userName, password }),
+        }
+      );
       if (response.ok) {
         const userData = await response.json();
         dispatch(setAccount(userData));
@@ -79,7 +82,7 @@ const LoginPage: React.FC = () => {
   ) => {
     try {
       const response = await fetch(
-        "http://localhost:3000/aidsbridge/register",
+        "https://aidsbridge-1.onrender.com/aidsbridge/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

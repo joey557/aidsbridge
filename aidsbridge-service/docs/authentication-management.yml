@@ -2,9 +2,9 @@ openapi: 3.1.0
 info:
   title: User Authentication and Management API
   summary: The REST service for managing user authentication, registration, and profile management.
-  version: 'v1.0'
+  version: "v1.0"
 servers:
-  - url: http://localhost:3000
+  - url: https://aidsbridge-1.onrender.com
 paths:
   /users/register:
     post:
@@ -13,9 +13,9 @@ paths:
       requestBody:
         required: true
         content:
-          'application/json':
+          "application/json":
             schema:
-              $ref: '#/components/schemas/UserRegistration'
+              $ref: "#/components/schemas/UserRegistration"
             examples:
               userRegistrationExample:
                 value:
@@ -26,15 +26,15 @@ paths:
         201:
           description: User registered successfully
           content:
-            'application/json':
+            "application/json":
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
         400:
           description: Bad request
           content:
-            'application/json':
+            "application/json":
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /users/login:
     post:
@@ -43,9 +43,9 @@ paths:
       requestBody:
         required: true
         content:
-          'application/json':
+          "application/json":
             schema:
-              $ref: '#/components/schemas/UserLogin'
+              $ref: "#/components/schemas/UserLogin"
             examples:
               userLoginExample:
                 value:
@@ -55,15 +55,15 @@ paths:
         200:
           description: Login successful
           content:
-            'application/json':
+            "application/json":
               schema:
-                $ref: '#/components/schemas/UserToken'
+                $ref: "#/components/schemas/UserToken"
         401:
           description: Authentication failed
           content:
-            'application/json':
+            "application/json":
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /users/{userId}:
     put:
@@ -79,9 +79,9 @@ paths:
       requestBody:
         required: true
         content:
-          'application/json':
+          "application/json":
             schema:
-              $ref: '#/components/schemas/UserProfileUpdate'
+              $ref: "#/components/schemas/UserProfileUpdate"
             examples:
               userProfileUpdateExample:
                 value:
@@ -92,15 +92,15 @@ paths:
         200:
           description: Profile updated successfully
           content:
-            'application/json':
+            "application/json":
               schema:
-                $ref: '#/components/schemas/UserProfile'
+                $ref: "#/components/schemas/UserProfile"
         400:
           description: Bad request
           content:
-            'application/json':
+            "application/json":
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
 components:
   schemas:

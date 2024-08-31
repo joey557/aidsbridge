@@ -14,14 +14,11 @@ import { styled } from "@mui/material/styles";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useNavigate } from "react-router-dom";
 
-
-
 //Create new article button
 interface CreateArticleFormProps {
   open: boolean;
   onClose: () => void;
 }
-
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -45,13 +42,11 @@ const CreateArticleForm: React.FC<CreateArticleFormProps> = ({
   const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
 
-  
-
   const uploadFileToServer = (file: string | Blob) => {
     const formData = new FormData();
     formData.append("eventsImage", file);
 
-    fetch("http://localhost:3000/aidsbridge/upload", {
+    fetch("https://aidsbridge-1.onrender.com/aidsbridge/upload", {
       method: "POST",
       body: formData,
     })
@@ -64,7 +59,7 @@ const CreateArticleForm: React.FC<CreateArticleFormProps> = ({
       .catch((error) => console.error("Error:", error));
   };
 
-  const handleFileChange = (event:any) => {
+  const handleFileChange = (event: any) => {
     const file = event.target.files[0];
     uploadFileToServer(file);
   };
@@ -93,7 +88,7 @@ const CreateArticleForm: React.FC<CreateArticleFormProps> = ({
 
     try {
       const response = await fetch(
-        "http://localhost:3000/aidsbridge/articles",
+        "https://aidsbridge-1.onrender.com/aidsbridge/articles",
         {
           method: "POST",
           headers: {
@@ -106,7 +101,7 @@ const CreateArticleForm: React.FC<CreateArticleFormProps> = ({
       if (response.ok) {
         console.log("Article created successfully");
         onClose();
-        navigate('/')
+        navigate("/");
       } else {
         const errorMessage = await response.text();
         console.error("Failed to create article:", errorMessage);

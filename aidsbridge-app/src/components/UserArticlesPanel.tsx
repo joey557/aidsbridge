@@ -19,7 +19,7 @@ import { deleteArticle, updateArticle } from "../store/articles-slice";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../store/account-slice";
 
-//user profile's article after user login 
+//user profile's article after user login
 interface Article {
   _id?: string;
   title: string;
@@ -44,7 +44,7 @@ const ArticlesPanel: React.FC<ArticlesPanelProps> = ({ articles }) => {
     content: "",
   });
 
-  const handleClickOpen = (article:any) => {
+  const handleClickOpen = (article: any) => {
     setEditData({
       _id: article._id,
       title: article.title,
@@ -68,7 +68,7 @@ const ArticlesPanel: React.FC<ArticlesPanelProps> = ({ articles }) => {
   const handleDelete = async (articleId: string) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/aidsbridge/articles/${articleId}`,
+        `https://aidsbridge-1.onrender.com/aidsbridge/articles/${articleId}`,
         {
           method: "DELETE",
         }
@@ -85,7 +85,7 @@ const ArticlesPanel: React.FC<ArticlesPanelProps> = ({ articles }) => {
   const handleUpdate = async (articleId: string, newData: Partial<Article>) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/aidsbridge/articles/${articleId}`,
+        `https://aidsbridge-1.onrender.com/aidsbridge/articles/${articleId}`,
         {
           method: "PUT",
           headers: {

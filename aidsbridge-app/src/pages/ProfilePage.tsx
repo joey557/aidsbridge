@@ -74,7 +74,7 @@ export default function VerticalTabs() {
     //console.log('New credentials are set to:', newUsername, newPassword);
     try {
       const response = await fetch(
-        `http://localhost:3000/aidsbridge/user/update/${accountId}`,
+        `https://aidsbridge-1.onrender.com/aidsbridge/user/update/${accountId}`,
         {
           method: "PUT",
           headers: {

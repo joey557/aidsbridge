@@ -71,7 +71,7 @@ export default function MediaCard() {
 
   useEffect(() => {
     // Fetch images and map them by imageId
-    fetch("http://localhost:3000/aidsbridge/upload")
+    fetch("https://aidsbridge-1.onrender.com/aidsbridge/upload")
       .then((response) => response.json())
       .then((data) => {
         const imageMap = data.reduce(

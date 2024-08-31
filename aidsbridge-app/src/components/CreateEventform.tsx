@@ -60,19 +60,22 @@ export default function CreateEventForm() {
     const { title, content, creator, createdDate, eventsDate } = eventData;
     try {
       console.log("Request Data:", eventData); // Print request data for debugging
-      const response = await fetch("http://localhost:3000/aidsbridge/events", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title,
-          content,
-          creator,
-          createdDate,
-          eventsDate,
-        }),
-      });
+      const response = await fetch(
+        "https://aidsbridge-1.onrender.com/aidsbridge/events",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title,
+            content,
+            creator,
+            createdDate,
+            eventsDate,
+          }),
+        }
+      );
 
       if (response.ok) {
         alert("Event created successfully!");
